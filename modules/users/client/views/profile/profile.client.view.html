@@ -1,0 +1,24 @@
+<div class="row" ng-controller="ProfilesController" ng-init="findOne()">
+	<div class="col-md-offset-1 col-md-10">
+		<div ng-show="error" class="text-danger">
+			<strong ng-bind="error"></strong>
+		</div>
+		<div ng-show="profile">
+			<a class="btn btn-primary" ui-sref="profiles.edit({ profileId: profile._id })">
+				<i class="glyphicon glyphicon-edit"></i>
+				Edit
+			</a>
+			<a class="btn btn-danger" ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+				Remove
+			</a>
+			<h3>{{1 + 1}}</h3>
+			<h2>{{profile.name}}</h2>
+			<h3>{{profile.degree}}</h3>
+			<h4>{{profile.institution}}, {{profile.region}} region</h4>
+			<p><a ng-href="mailto:{{profile.email}}">{{profile.email}}</a></p>
+			<h3>Biography</h3>
+			<p>{{profile.bio}}</p>
+		</div>
+	</div>
+</div>
