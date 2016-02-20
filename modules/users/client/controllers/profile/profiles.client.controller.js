@@ -1,5 +1,5 @@
-angular.module('profiles').controller('ProfilesController', ['$scope', '$location', '$stateParams', '$state', 'Profiles', 
-  function($scope, $location, $stateParams, $state, Profiles){
+angular.module('users').controller('ProfilesController', ['$scope', '$location', '$stateParams', '$state', 'Profiles', 
+  function($scope, $location, $stateParams, $state, Profiles) {
     $scope.find = function() {
       /* set loader*/
       $scope.loading = true;
@@ -58,14 +58,14 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$locatio
       /* Create the profile object */
       var profile = {
         name: $scope.name,
-		username: $scope.username,
-	    password: $scope.password,
-	    email: $scope.email,
-	    bio: $scope.bio,
-	    userType: $scope.userType,
-	    region: $scope.region,
-	    institution: $scope.institution,
-	    degree: $scope.degree
+  	   	username: $scope.username,
+  	    password: $scope.password,
+  	    email: $scope.email,
+  	    bio: $scope.bio,
+  	    userType: $scope.userType,
+  	    region: $scope.region,
+  	    institution: $scope.institution,
+  	    degree: $scope.degree
       };
 
       /* Save the article using the Profiles factory */
