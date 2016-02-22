@@ -1,4 +1,4 @@
-<div class="row" ng-controller="ProfilesController" ng-init="findOne()">
+<!--<div class="row" ng-controller="ProfilesController" ng-init="findOne()">
 	<div class="col-md-offset-1 col-md-10">
 		<div ng-show="user">
 			<h3>{{1 + 1}}</h3>
@@ -10,4 +10,29 @@
 			<p>{{profile.bio}}</p>
 		</div>
 	</div>
-</div>
+</div>-->
+
+<section class="row" ng-controller="EditProfileController">
+  <div class="row">
+      <fieldset>
+		<section class="row" ng-controller="ChangeProfilePictureController">
+			<div class="form-group">
+			  <h2>{{user.firstName}} {{user.lastName}}</h2>
+			  <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+			</div>
+		</section>
+        <div class="form-group">
+          <label for="email">Email: </label>   {{user.email}}
+        </div>
+		<div class="form-group">
+          <label for="bio">About me: </label>   {{user.bio}}
+        </div>
+		<div class="form-group">
+          <label for="institution">Institution: </label>   {{user.institution}}
+        </div>
+		<div class="form-group">
+          <label for="degree">Degree: </label>   {{user.degree}}
+        </div>
+      </fieldset>
+  </div>
+</section>

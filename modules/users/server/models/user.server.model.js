@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint no-multi-spaces:0, indent:0 */
 /**
  * Module dependencies.
  */
