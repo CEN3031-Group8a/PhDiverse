@@ -85,22 +85,22 @@ var UserSchema = new Schema({
     required: 'Please provide at least one role'
   },
   bio: {
-	  type: String
+    type: String
   },
   region: {
-	  type: String
+    type: String
   },
   institution: {
-	  type: String
+    type: String
   },
   degree: {
-	  type: String
+    type: String
   },
   curriculumVitae: {
-	  type: String
+    type: String
   },
   linkedInAcct: {
-	  type: String
+    type: String
   },
   publications : [String],
   videos : [String],
