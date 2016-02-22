@@ -1,5 +1,5 @@
 'use strict';
-
+/* eslint no-multi-spaces:0, indent:0 */
 // Setting up route
 angular.module('users').config(['$stateProvider',
   function ($stateProvider) {
@@ -29,9 +29,13 @@ angular.module('users').config(['$stateProvider',
         url: '/accounts',
         templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
       })
-      .state('settings.picture', {
-        url: '/picture',
-        templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
+	  .state('settings.picture', {
+		  url: '/picture',
+		  templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
+	  })
+	  .state('settings.currvit', {
+        url: '/curriculumvitae',
+        templateUrl: 'modules/users/client/views/settings/change-curriculum-vitae.client.view.html'
       })
       .state('authentication', {
         abstract: true,
