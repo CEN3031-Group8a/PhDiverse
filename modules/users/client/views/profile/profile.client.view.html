@@ -1,17 +1,3 @@
-<!--<div class="row" ng-controller="ProfilesController" ng-init="findOne()">
-	<div class="col-md-offset-1 col-md-10">
-		<div ng-show="user">
-			<h3>{{1 + 1}}</h3>
-			<h2>{{profile.name}}</h2>
-			<h3>{{profile.degree}}</h3>
-			<h4>{{profile.institution}}, {{profile.region}} region</h4>
-			<p><a ng-href="mailto:{{profile.email}}">{{profile.email}}</a></p>
-			<h3>Biography</h3>
-			<p>{{profile.bio}}</p>
-		</div>
-	</div>
-</div>-->
-
 <section class="row" ng-controller="EditProfileController">
   <div class="row">
       <fieldset>
@@ -33,6 +19,22 @@
 		<div class="form-group">
           <label for="degree">Degree: </label>   {{user.degree}}
         </div>
+		<div class="form-group" ng-controller="ChangeCurriculumVitaeController">
+			  <label>Curriculum Vitae: </label>
+			  <a ng-href="{{curriculumVitaeURL}}" target="_self" download="CV.pdf">Download</a>
+		</div>
+		<div class="form-group">
+			<label for="publications">Publications</label>
+			<li class="form-group" ng-repeat="publication in user.publications">
+				<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
+			</li>
+		</div>
+		<div class="form-group">
+			<label for="videos">Videos</label>
+			<li class="form-group" ng-repeat="video in user.videos">
+				<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
+			</li>
+		</div>
       </fieldset>
   </div>
 </section>

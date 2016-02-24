@@ -95,8 +95,8 @@ var UserSchema = new Schema({
   degree: { type: String },
   curriculumVitae: { type: String },
   linkedInAcct: { type: String },
-  publications : [String],
-  videos : [String],
+  publications : [ { link: { type: String } } ],
+  videos : [ { link: { type: String } } ],
   updated: {
     type: Date
   },
