@@ -1,0 +1,40 @@
+<section class="row" ng-controller="EditProfileController">
+  <div class="row">
+      <fieldset>
+		<section class="row" ng-controller="ChangeProfilePictureController">
+			<div class="form-group">
+			  <h2>{{user.firstName}} {{user.lastName}}</h2>
+			  <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+			</div>
+		</section>
+        <div class="form-group">
+          <label for="email">Email: </label>   {{user.email}}
+        </div>
+		<div class="form-group">
+          <label for="bio">About me: </label>   {{user.bio}}
+        </div>
+		<div class="form-group">
+          <label for="institution">Institution: </label>   {{user.institution}}
+        </div>
+		<div class="form-group">
+          <label for="degree">Degree: </label>   {{user.degree}}
+        </div>
+		<div class="form-group" ng-controller="ChangeCurriculumVitaeController">
+			  <label>Curriculum Vitae: </label>
+			  <a ng-href="{{curriculumVitaeURL}}" target="_self" download="CV.pdf">Download</a>
+		</div>
+		<div class="form-group">
+			<label for="publications">Publications</label>
+			<li class="form-group" ng-repeat="publication in user.publications">
+				<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
+			</li>
+		</div>
+		<div class="form-group">
+			<label for="videos">Videos</label>
+			<li class="form-group" ng-repeat="video in user.videos">
+				<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
+			</li>
+		</div>
+      </fieldset>
+  </div>
+</section>

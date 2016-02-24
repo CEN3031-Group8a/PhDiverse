@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint no-multi-spaces:0, indent:0 */
 /**
  * Module dependencies.
  */
@@ -28,22 +29,6 @@ var validateLocalStrategyEmail = function (email) {
  * User Schema
  */
 var UserSchema = new Schema({
-  /*name: String,
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  email: String,
-  bio: String,
-  userType: String,
-  region: String,
-  institution: String,
-  degree: String,
-  curriculumVitae: String,
-  linkedInAcct: String,
-  profilePic: { data: Buffer, contentType: String },
-  //publications : [String],
-  //videos : [String],
-  created_at: Date,
-  updated_at: Date,*/
   firstName: {
     type: String,
     trim: true,
@@ -86,6 +71,10 @@ var UserSchema = new Schema({
     type: String,
     default: 'modules/users/client/img/profile/default.png'
   },
+  curriculumVitaeURL: {
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
   provider: {
     type: String,
     required: 'Provider is required'
@@ -95,11 +84,19 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin']
+      enum: ['user', 'admin', 'recruiter']
     }],
     default: ['user'],
     required: 'Please provide at least one role'
   },
+  bio: { type: String },
+  region: { type: String },
+  institution: { type: String },
+  degree: { type: String },
+  curriculumVitae: { type: String },
+  linkedInAcct: { type: String },
+  publications : [ { link: { type: String } } ],
+  videos : [ { link: { type: String } } ],
   updated: {
     type: Date
   },
