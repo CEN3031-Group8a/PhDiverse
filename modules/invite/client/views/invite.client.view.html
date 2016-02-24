@@ -1,23 +1,18 @@
 <div ng-controller="InviteController">
   <h3 class="col-md-12 text-center">Invite New Member</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
-    <form name="userForm" ng-submit="sendMail(userForm.$valid)" class="invite" novalidate autocomplete="off">
+    <form name="userForm" novalidate autocomplete="off">
       <fieldset>
 		    
         <div class="form-group" show-errors>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="inviteEmail" placeholder="Email" lowercase required>
-          <div ng-messages="userForm.email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-          </div>
+          <input type="email" id="email" name="email" class="form-control" ng-model="inviteEmail" placeholder="Email">
         </div>
 
         
         
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Invite</button>
-          &nbsp; or&nbsp;
+          <button ng-click="sendMail()" ng-disabled="!inviteEmail.length" class="btn btn-primary">Invite</button>
         </div>
         <div ng-show="error" class="text-center text-danger">
           <strong ng-bind="error"></strong>

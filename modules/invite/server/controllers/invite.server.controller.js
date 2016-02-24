@@ -30,16 +30,16 @@ transporter.sendMail(mailOpts, function (err, response) {
 */
 
 //Function to send the mail
-exports.sendMail('/invite', function (req, res) {
+exports.sendMail = function (req, res) {
     //Define request body as data
     var data = req.body;
     //Define the mail options from the data file
     var mailOpts = {
         from: 'sandbox97a2e5138c3e48169a39e01a85feda91.mailgun.org',
-        to: 'data.email',
+        to: data.inviteEmail,
         subject: 'Invite from PhDiverse!',
         text : 'test message form mailgun',
-        html : '<b>test message form mailgun</b>'
+        html : '<a href="http://localhost:3000/authentication/signup">Link to sign up!</a>'
     };
 
     //Use defined transporter to send mail with mail options
@@ -50,7 +50,7 @@ exports.sendMail('/invite', function (req, res) {
             console.log('Mail sent');
         }
     });
-});
+};
 
 /*exports.sendMail = function(req, res) {
  

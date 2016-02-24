@@ -6,10 +6,10 @@ angular.module('invite').controller('InviteController', ['$scope', '$stateParams
     
 
     // Send an invite email
-    this.sendMail = function () {
+    $scope.sendMail = function () {
           //Create email data
           var data = ({
-            inviteEmail: this.inviteEmail,
+            inviteEmail: $scope.inviteEmail,
             inviteMessage: 'You have been invited to PhDiverse! Here is a signup link to get started:',
           });
     
@@ -19,16 +19,9 @@ angular.module('invite').controller('InviteController', ['$scope', '$stateParams
             $state.go($state.previous.state.name || 'home', $state.previous.params);
           }).error(function (response) {
             $scope.error = response.message;
-      });
+          });
+        $scope.inviteEmail = '';   
     };
-    
-
-      
-
-    
-
-    
-
-    
+  
   }
 ]);
