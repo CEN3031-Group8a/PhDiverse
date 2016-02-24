@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint no-multi-spaces:0, indent:0 */
 /**
  * Module dependencies.
  */
@@ -70,6 +71,10 @@ var UserSchema = new Schema({
     type: String,
     default: 'modules/users/client/img/profile/default.png'
   },
+  curriculumVitaeURL: {
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
   provider: {
     type: String,
     required: 'Provider is required'
@@ -84,26 +89,14 @@ var UserSchema = new Schema({
     default: ['user'],
     required: 'Please provide at least one role'
   },
-  bio: {
-	  type: String
-  },
-  region: {
-	  type: String
-  },
-  institution: {
-	  type: String
-  },
-  degree: {
-	  type: String
-  },
-  curriculumVitae: {
-	  type: String
-  },
-  linkedInAcct: {
-	  type: String
-  },
-  publications : [String],
-  videos : [String],
+  bio: { type: String },
+  region: { type: String },
+  institution: { type: String },
+  degree: { type: String },
+  curriculumVitae: { type: String },
+  linkedInAcct: { type: String },
+  publications : [ { link: { type: String } } ],
+  videos : [ { link: { type: String } } ],
   updated: {
     type: Date
   },
