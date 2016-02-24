@@ -24,9 +24,8 @@
   min-height: 100%;
   font-size: 100px;
   text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: white;
+  opacity: 1;
+  background: blue;
   cursor: inherit;
   display: block;
 }
