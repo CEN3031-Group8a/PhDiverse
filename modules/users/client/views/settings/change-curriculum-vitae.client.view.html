@@ -2,13 +2,13 @@
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
     <form class="signin form-horizontal">
       <fieldset>
-		<div class="form-group text-center">
+		<div class="form-group text-center" ng-hide="curriculumVitaeURL=='modules/users/client/img/profile/default.png'">
 		  <label>Current Curriculum Vitae: </label>
 		  <a ng-href="{{curriculumVitaeURL}}" target="_self" download="CV.pdf">Download</a>
 		</div>
         <div class="text-center form-group" ng-hide="uploader.queue.length">
           <span class="btn btn-default btn-file">
-              Select New File (.pdf) <input type="file" nv-file-select uploader="uploader">
+              Select New File (.pdf) <input type="file" nv-file-select uploader="uploader" accept=".pdf">
           </span>
         </div>
         <div class="text-center form-group" ng-show="uploader.queue.length">
