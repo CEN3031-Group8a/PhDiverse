@@ -37,6 +37,34 @@
 					  </div>
 					</div>
 					<br><br>
+					<div class="form-group" show-errors>
+						<label for="bio">Biography</label><br>
+						<input name="bio" type="text" ng-model="user.bio" id="bio" class="form-control" placeholder="Tell us about yourself">
+					</div> 
+					<br><br>
+					<div class="form-group" show-errors>
+						<label for="region">Region</label><br>
+						<select name="region" id="region" ng-model="user.region">
+						  <option value="">---Please select---</option>
+						  <option value="northeast">Northeast</option>
+						  <option value="midatlantic">Mid-Atlantic</option>
+						  <option value="southeast">Southeast</option>
+						  <option value="midwest">Midwest</option>
+						  <option value="west">West</option>
+						  <option value="southwest">Southwest</option>
+						</select>
+					</div>
+					<br><br>
+					<div class="form-group" show-errors>
+					  <label for="institution">Institution</label><br>
+					  <input name="institution" type="text" ng-model="user.institution" id="institution" class="form-control" placeholder="Institution">
+					</div>
+					<br><br>					
+					<div class="form-group" show-errors>
+					  <label for="degree">Degree</label><br>
+					  <input name="degree" type="text" ng-model="user.degree" id="degree" class="form-control" placeholder="Degree">
+					</div>
+					<br><br>
 					<div class="form-group">
 					    <label for="publications">Publications</label><br>
 						<div class="form-group" ng-repeat="publication in user.publications track by $index">
