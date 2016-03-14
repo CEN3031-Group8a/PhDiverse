@@ -20,6 +20,9 @@
         <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
       </li>
     </ul>
+	<ul class="nav navbar-nav">
+      <li><a ui-sref="admin.users">Search</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <li ui-sref-active="active">
         <a ui-sref="authentication.signup">Sign Up</a>
@@ -41,9 +44,6 @@
           </li>
           <li ui-sref-active="active">
             <a ui-sref="settings.profile">Edit Profile</a>
-          </li>
-		  <li ui-sref-active="active">
-            <a ui-sref="admin.users">Search</a>
           </li>
           <li ui-sref-active="active">
             <a ui-sref="settings.picture">Change Profile Picture</a>
