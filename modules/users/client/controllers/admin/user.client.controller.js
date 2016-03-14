@@ -1,10 +1,9 @@
 'use strict';
-
+/* eslint no-multi-spaces:0, indent:0 */
 angular.module('users.admin').controller('UserController', ['$scope', '$state', 'Authentication', 'userResolve',
   function ($scope, $state, Authentication, userResolve) {
     $scope.authentication = Authentication;
     $scope.user = userResolve;
-
     $scope.remove = function (user) {
       if (confirm('Are you sure you want to delete this user?')) {
         if (user) {
@@ -35,6 +34,13 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+    };
+	
+	$scope.add = function () {
+		console.log(typeof($scope.authentication.user._id));
+		$scope.user.requests.push($scope.authentication.user._id);
+		console.log($scope.user);
+		$scope.user.$update();
     };
   }
 ]);
