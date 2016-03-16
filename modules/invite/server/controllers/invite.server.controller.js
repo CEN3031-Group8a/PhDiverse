@@ -38,8 +38,9 @@ exports.sendMail = function (req, res) {
         from: 'sandbox97a2e5138c3e48169a39e01a85feda91.mailgun.org',
         to: data.inviteEmail,
         subject: 'Invite from PhDiverse!',
-        text : 'test message form mailgun',
-        html : '<a href="http://localhost:3000/authentication/signup">Link to sign up!</a>'
+        text : data.inviteMessage,
+//        html : '<p>Hello! You\'ve been invited to PhDiverse! <a href="http://localhost:3000/authentication/signup">Link to sign up!</a></p>'
+        html : '<p>' + data.inviteMessage + '</p><p>' + data.usernameMessage + '</p><p>' + data.passwordMessage + '</p><p>Here is a <a href="http://localhost:8080/authentication/signup">signup link</a> to get you started!</p>'
     };
 
     //Use defined transporter to send mail with mail options

@@ -217,3 +217,31 @@ UserSchema.statics.generateRandomPassphrase = function () {
 };
 
 mongoose.model('User', UserSchema);
+
+var TempUserSchema = new Schema({
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    default: '',
+    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
+  },
+  username: {
+    type: String,
+    unique: 'Username already exists',
+    required: 'Please fill in a username',
+    lowercase: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    default: ''
+  }
+  created: {
+    type: Date,
+    default: Date.now
+  },
+});
+
+mongoose.model('TempUser', TempUserSchema);

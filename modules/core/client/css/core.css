@@ -46,7 +46,7 @@ a:hover .header-profile-image {
 }
 .overlay {
     position:absolute;
-    left: 0%;
+    left: 0;
     top: 35%;
     width: 100%;
     opacity: 0.8;
