@@ -11,7 +11,7 @@
         <a class="btn btn-primary" ng-click="remove();" ng-if="user._id !== authentication.user._id" ng-hide="authentication.user.roles[0] !== 'admin'">
           <i class="glyphicon glyphicon-trash"></i>
         </a>
-        <a class="btn btn-primary" ng-click="add();" ng-show="user._id !== authentication.user._id">
+        <a class="btn btn-primary" ng-click="add();" ng-show="user._id !== authentication.user._id && !(user.requests.indexOf(authentication.user._id) > -1)">
           <i class="glyphicon glyphicon-plus"></i> Add Colleague
         </a>
       </div>

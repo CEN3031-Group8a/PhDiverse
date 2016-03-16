@@ -37,9 +37,7 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
     };
 	
 	$scope.add = function () {
-		console.log(typeof($scope.authentication.user._id));
 		$scope.user.requests.push($scope.authentication.user._id);
-		console.log($scope.user);
 		$scope.user.$update();
     };
   }
