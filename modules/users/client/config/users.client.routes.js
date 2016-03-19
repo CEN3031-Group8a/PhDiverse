@@ -21,6 +21,10 @@ angular.module('users').config(['$stateProvider',
         url: '/edit-profile',
         templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
       })
+      .state('settings.messages', {
+        url: '/messages',
+        templateUrl: 'modules/users/client/views/settings/messages.client.view.html'
+      })
       .state('settings.password', {
         url: '/password',
         templateUrl: 'modules/users/client/views/settings/change-password.client.view.html'
