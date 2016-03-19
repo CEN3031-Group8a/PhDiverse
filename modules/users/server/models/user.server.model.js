@@ -216,8 +216,11 @@ UserSchema.statics.generateRandomPassphrase = function () {
   });
 };
 
-mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
 
+/**
+ * TempUser Schema
+ */
 var TempUserSchema = new Schema({
   email: {
     type: String,
@@ -237,11 +240,17 @@ var TempUserSchema = new Schema({
   password: {
     type: String,
     default: ''
-  }
+  },
   created: {
     type: Date,
-    default: Date.now
-  },
+    expires: 86400,
+    default: Date.now()
+  }
 });
 
-mongoose.model('TempUser', TempUserSchema);
+var TempUser = mongoose.model('TempUser', TempUserSchema);
+
+module.exports = {
+  User: User,
+  TempUser: TempUser
+};

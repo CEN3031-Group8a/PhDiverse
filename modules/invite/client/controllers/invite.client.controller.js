@@ -38,20 +38,16 @@ angular.module('invite').controller('InviteController', ['$scope', '$stateParams
 		// Send an invite email
 		$scope.sendMail = function () {
 
-			console.log('attempting passphrase generation');
-
 			// basic creation of a random password
 			var tempUsername = Math.random().toString(16).substring(2);
 			var tempPassword = Math.random().toString(36).substring(2);
-
-			console.log('passphrase successfully generated');
 
 			//Create email data
 			var data = ({
 				inviteEmail: $scope.inviteEmail,
 				inviteMessage: 'You have been invited to PhDiverse! Your temporary username and password combination is listed below. They will expire in 24 hours.',
-				usernameMessage: 'Username: ' + tempUsername,
-				passwordMessage: 'Password: ' + tempPassword
+				username: tempUsername,
+				password: tempPassword
 			});
 
 			//Post request (pass data) ***Check on api/invite (in router?)
