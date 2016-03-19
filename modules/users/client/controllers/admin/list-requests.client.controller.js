@@ -42,14 +42,14 @@ angular.module('users.admin').controller('RequestListController', ['$scope', '$f
 		userUpdate2.requests.splice(userUpdate2.requests.indexOf(userUpdate1._id), 1);
 		userUpdate1.$update();
 		userUpdate2.$update();
-		$state.go('settings.add-connections');
+		$scope.buildPager();
     };
 	
 	$scope.remove = function (user) {
 		var userUpdate = new Users($scope.currUser);
 		userUpdate.requests.splice(userUpdate.requests.indexOf(user._id), 1);
 		userUpdate.$update();
-		$state.go('settings.add-connections');
+		$scope.buildPager();
     };
   }
 ]);
