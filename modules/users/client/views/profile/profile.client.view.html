@@ -1,7 +1,7 @@
-<section class="row" ng-controller="EditProfileController">
+<section class="row" ng-controller="EditProfileController"  ng-init="init();">
   <div class="row">
       <fieldset>
-		<section class="row" ng-controller="ChangeProfilePictureController">
+		<section class="row" ng-controller="ChangeProfilePictureController" ng-init="init();">
 			<div class="form-group">
 			  <h2>{{user.firstName}} {{user.lastName}}</h2>
 			  <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
@@ -19,7 +19,7 @@
 		<div class="form-group">
           <label for="degree">Degree: </label>   {{user.degree}}
         </div>
-		<div class="form-group" ng-controller="ChangeCurriculumVitaeController">
+		<div class="form-group" ng-controller="ChangeCurriculumVitaeController"  ng-init="init();">
 			  <label>Curriculum Vitae: </label>
 			  <a ng-href="{{curriculumVitaeURL}}" ng-hide="curriculumVitaeURL=='modules/users/client/img/profile/default.png'" target="_self" download="CV.pdf">Download</a>
 		</div>
