@@ -1,8 +1,8 @@
 <section>
-  <div class="page-header">
+  <div>
+    <div class="row"><br></div>
     <div class="row">
       <div class="col-md-6">
-        <h1 ng-bind="user.username"></h1>
       </div>
       <div class="col-md-4">
         <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})" ng-hide="authentication.user.roles[0] !== 'admin'">
@@ -17,8 +17,47 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
+    <section class="row" ng-controller="EditProfileController" ng-init="init(user)">
+	  <div class="row">
+		  <fieldset>
+			<section class="row" ng-controller="ChangeProfilePictureController" ng-init="init(user)">
+				<div class="form-group">
+				  <h2>{{user.displayName}}</h2>
+				  <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+				</div>
+			</section>
+			<div class="form-group">
+			  <label for="email">Email: </label>   {{user.email}}
+			</div>
+			<div class="form-group">
+			  <label for="bio">About me: </label>   {{user.bio}}
+			</div>
+			<div class="form-group">
+			  <label for="institution">Institution: </label>   {{user.institution}}
+			</div>
+			<div class="form-group">
+			  <label for="degree">Degree: </label>   {{user.degree}}
+			</div>
+			<div class="form-group" ng-controller="ChangeCurriculumVitaeController" ng-init="init(user)">
+				  <label>Curriculum Vitae: </label>
+				  <a ng-href="{{user.curriculumVitaeURL}}" ng-hide="curriculumVitaeURL=='modules/users/client/img/profile/default.png'" target="_self" download="CV.pdf">Download</a>
+			</div>
+			<div class="form-group">
+				<label for="publications">Publications</label>
+				<li class="form-group" ng-repeat="publication in user.publications">
+					<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
+				</li>
+			</div>
+			<div class="form-group">
+				<label for="videos">Videos</label>
+				<li class="form-group" ng-repeat="video in user.videos">
+					<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
+				</li>
+			</div>
+		  </fieldset>
+	  </div>
+	</section>
+  <!--<div class="row">
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-3"><strong>First Name</strong></div>
@@ -50,5 +89,5 @@
         <div class="col-md-6" ng-bind="user.roles"></div>
       </div>
     </div>
-  </div>
+  </div>-->
 </section>
