@@ -1,5 +1,5 @@
 'use strict';
-
+/* eslint indent:0 */
 angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader',
   function ($scope, $timeout, $window, Authentication, FileUploader) {
     $scope.init = function(user) {
