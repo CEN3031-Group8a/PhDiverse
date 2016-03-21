@@ -1,5 +1,5 @@
 'use strict';
-
+/* eslint no-multi-spaces:0, indent:0 */
 /**
  * Module dependencies.
  */
@@ -24,84 +24,60 @@ exports.update = function (req, res) {
   var oldID = user._id;
   var oldUser = new User();
   var updatedUser = new User();
+  
+	function asyncCheck() {
+	  // `delay` returns a promise
+	  return new Promise(function(resolve, reject) {
+		// Only `delay` is able to resolve or reject the promise
+		User.findById(oldID, function(err, user) {
+		  if (err) throw err;
+		  oldUser = user;
+		  resolve(7);
+		});	
+	  });
+	}
+	
+	function findChanges(prevUser, nextUser) {
+	  console.log('prevUser: ',prevUser);
+	  console.log('nextUser: ',nextUser);
+	  if(nextUser !== prevUser){
+		  if(nextUser.region !== prevUser.region){
+			  console.log('New user region: ', nextUser.region);
+		  }
+	  }
+	  return;
+	}
 
-  //console.log(user);
+	asyncCheck().then(function(v) { //asyncCheck() returns a promise
+		if (user) {
+			// Merge existing user
+			user = _.extend(user, req.body);
+			user.updated = Date.now();
+			user.displayName = user.firstName + ' ' + user.lastName;
 
-  //Find unupdated version of user by their ID for comparison purposes
-  User.findById(oldID, function(err, user) {
-    if (err) throw err;
-
-    // show the one user
-    oldUser = user;
-    //console.log('********************************************************');
-    console.log(user);
-  });
-
-  //Use differences library to determine differnces between old user and updated version
-  /*var callback = function(){
-    console.log('********callback did something');
-    var differences = diff(oldUser, user);
-    console.log(differences);
-  };
-  */
-
-
-
-  // For security measurement we remove the roles from the req.body object
-  //delete req.body.roles;
-
-  if (user) {
-    // Merge existing user
-    user = _.extend(user, req.body);
-    user.updated = Date.now();
-    user.displayName = user.firstName + ' ' + user.lastName;
-
-    user.save(function (err) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        req.login(user, function (err) {
-          if (err) {
-            res.status(400).send(err);
-          } else {
-            res.json(user);
-          }
-        });
-      }
-    });
-  } else {
-    res.status(400).send({
-      message: 'User is not signed in'
-    });
-  }
-
-  /* Find unupdated version of user by their ID for comparison purposes
-  User.findById(oldID, function(err, user) {
-    if (err) throw err;
-
-    // show the one user
-    updatedUser = user;
-    console.log('********************************************************');
-    console.log(user);
-  });
-  */
-
-  function asyncCheck() {
-    User.findById(oldID, function(err, user) {
-      if (err) throw err;
-
-      // show the one user
-      updatedUser = user;
-      console.log('********************************asyncCheck was called!');
-      console.log(user);
-    });
-  };
-
-  //Deterimine differences 
-  var differences = asyncCheck.then(diff(oldUser, updatedUser));
-  console.log(differences);
+			user.save(function (err) {
+			  if (err) {
+				return res.status(400).send({
+				  message: errorHandler.getErrorMessage(err)
+				});
+			  } else {
+				req.login(user, function (err) {
+				  if (err) {
+					res.status(400).send(err);
+				  } else {
+					res.json(user);
+					updatedUser = user;
+					findChanges(oldUser, updatedUser);
+				  }
+				});
+			  }
+			});
+		  } else {
+			res.status(400).send({
+			  message: 'User is not signed in'
+			});
+		  }
+	});
 };
 
 
@@ -195,20 +171,6 @@ exports.changeCurriculumVitae = function (req, res) {
     });
   }
 };
-
-/**
- * Update profile picture
-    May require tweaking to change includes
- 
- exports.userByUsername = function(req, res, next, username) {
-  User.findOne({username: username}).exec(function(err, user){
-    if(err) return next(err);
-    if(!user) return next(new Error('Failed to load User ' + username));
-    req.user = user;
-    next();
-  });
- };
- */
 
 /**
  * Send User
