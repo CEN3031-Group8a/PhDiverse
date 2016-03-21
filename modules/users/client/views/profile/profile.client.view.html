@@ -1,14 +1,47 @@
+<!--<section class = "row">
+	<rect height = "30" width = "20" color = "blue"></rect>
+</section>
+
+
+
+
+<div class = "containter">
+	<div class = "row-fluid">
+		<div class = "span12">
+			<p> This is </p>
+		</div>
+		<div class = "col-lg-24 bg-info">
+			12
+		</div>
+	</div>
+</div>
+
+
+<div class="row-fluid">
+  <div class="span4">...</div>
+  <div class="span8">...</div>
+</div>
+
+
+
+
+
+
+
+
 <section class="row" ng-controller="EditProfileController">
-  <div class="row">
+	<rect height = "75" width = "100"> </rect>
+  	<div class="row">
       <fieldset>
+      	<center>
 		<section class="row" ng-controller="ChangeProfilePictureController">
 			<div class="form-group">
 			  <h2>{{user.firstName}} {{user.lastName}}</h2>
-			  <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+			  <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture" height = "1000" width = "500">
 			</div>
 		</section>
         <div class="form-group">
-          <label for="email">Email: </label>   {{user.email}}
+          		<label for="email">Email: </label>   {{user.email}}
         </div>
 		<div class="form-group">
           <label for="bio">About me: </label>   {{user.bio}}
@@ -35,6 +68,70 @@
 				<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
 			</li>
 		</div>
+		</center>
       </fieldset>
   </div>
 </section>
+
+-->
+
+
+
+<!doctype html>
+<html lang= "en">
+	<head>
+		<div class = "col">
+			<div class = "col-xs-12">.col-xs-12>
+				<style>
+					.col-xs-12{
+						height: 500px;
+						width: 80px;
+						background-color: orange;
+						color: white;
+						text-align: center;
+					}
+						.col-xs-6{
+						height: 500px;
+						width: 80px;
+						background-color: blue;
+						color: white;
+						text-align: center;
+					}
+						.col-xs-9{
+						height: 500px;
+						width: 80px;
+						background-color: navy;
+						color: white;
+						text-align: center;
+					}
+				</style>
+			</div>
+	</head>
+	<body>
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-xs-12">.col-xs-12</div>
+		</div>
+
+		<div class = "row">
+			<div class= "col-xs-6">.col-xs-6</div>
+			<div class= "col-xs-9">.col-xs-6</div>
+		</div>
+	</div>
+	</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
