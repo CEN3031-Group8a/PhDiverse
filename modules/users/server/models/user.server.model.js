@@ -110,7 +110,9 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  }
+  },
+  requests: [ { type: String, ref: 'User' } ],
+  connections: [ { type: String, ref: 'User' } ]
 });
 
 /**
