@@ -221,6 +221,7 @@ var User = mongoose.model('User', UserSchema);
 /**
  * TempUser Schema
  */
+ /*
 var TempUserSchema = new Schema({
   email: {
     type: String,
@@ -243,14 +244,14 @@ var TempUserSchema = new Schema({
   },
   created: {
     type: Date,
-    expires: 86400,
+    expires: 604800,
     default: Date.now()
   }
 });
 
 var TempUser = mongoose.model('TempUser', TempUserSchema);
-
+*/
 module.exports = {
   User: User,
-  TempUser: TempUser
+// TempUser: TempUser,
 };

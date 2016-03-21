@@ -7,8 +7,8 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  User = mongoose.model('User'),
-  TempUser = mongoose.model('TempUser');
+//  TempUser = mongoose.model('TempUser'),
+  User = mongoose.model('User');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [

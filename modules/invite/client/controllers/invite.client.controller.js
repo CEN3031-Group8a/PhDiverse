@@ -6,32 +6,32 @@ angular.module('invite').controller('InviteController', ['$scope', '$stateParams
 
 /*		$scope.generateRandomPassphrase = function () {
 		  return new Promise(function (resolve, reject) {
-		    var password = '';
-		    var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
+			var password = '';
+			var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
 
-		    // iterate until the we have a valid passphrase. 
-		    // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
-		    while (password.length < 20 || repeatingCharacters.test(password)) {
-		      // build the random password
-		      password = generatePassword.generate({
-		        length: Math.floor(Math.random() * (20)) + 20, // randomize length between 20 and 40 characters
-		        numbers: true,
-		        symbols: false,
-		        uppercase: true,
-		        excludeSimilarCharacters: true,
-		      });
+			// iterate until the we have a valid passphrase. 
+			// NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
+			while (password.length < 20 || repeatingCharacters.test(password)) {
+			  // build the random password
+			  password = generatePassword.generate({
+				length: Math.floor(Math.random() * (20)) + 20, // randomize length between 20 and 40 characters
+				numbers: true,
+				symbols: false,
+				uppercase: true,
+				excludeSimilarCharacters: true,
+			  });
 
-		      // check if we need to remove any repeating characters.
-		      password = password.replace(repeatingCharacters, '');
-		    }
+			  // check if we need to remove any repeating characters.
+			  password = password.replace(repeatingCharacters, '');
+			}
 
-		    // Send the rejection back if the passphrase fails to pass the strength test
-		    if (owasp.test(password).errors.length) {
-		      reject(new Error('An unexpected problem occured while generating the random passphrase'));
-		    } else {
-		      // resolve with the validated passphrase
-		      resolve(password);
-		    }
+			// Send the rejection back if the passphrase fails to pass the strength test
+			if (owasp.test(password).errors.length) {
+			  reject(new Error('An unexpected problem occured while generating the random passphrase'));
+			} else {
+			  // resolve with the validated passphrase
+			  resolve(password);
+			}
 		  });
 		};
 */
@@ -45,7 +45,7 @@ angular.module('invite').controller('InviteController', ['$scope', '$stateParams
 			//Create email data
 			var data = ({
 				inviteEmail: $scope.inviteEmail,
-				inviteMessage: 'You have been invited to PhDiverse! Your temporary username and password combination is listed below. They will expire in 24 hours.',
+				inviteMessage: 'You have been invited to PhDiverse! Your temporary username and password combination is listed below.',
 				username: tempUsername,
 				password: tempPassword
 			});

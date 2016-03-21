@@ -8,8 +8,8 @@ angular.module('invite').config(['$stateProvider',
         url: '/invite',
         templateUrl: 'modules/invite/client/views/invite.client.view.html',
         data: {
-	        roles: ['admin']
-	    }
+          roles: ['admin']
+        }
       });
   }
 ]);

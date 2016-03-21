@@ -29,7 +29,7 @@ transporter.sendMail(mailOpts, function (err, response) {
 });
 */
 
-var TempUser = require("../../../users/server/models/user.server.model").TempUser;
+var User = require('../../../users/server/models/user.server.model').User;
 
 //Function to send the mail
 exports.sendMail = function (req, res) {
@@ -42,7 +42,7 @@ exports.sendMail = function (req, res) {
 		subject: 'Invitation from PhDiverse!',
 		text : data.inviteMessage,
 //        html : '<p>Hello! You\'ve been invited to PhDiverse! <a href="http://localhost:3000/authentication/signup">Link to sign up!</a></p>'
-		html : '<p>' + data.inviteMessage + '</p><p>Username: ' + data.username + '</p><p>Password: ' + data.password + '</p><p>Here is a <a href="http://localhost:8080/authentication/signup">signup link</a> to get you started!</p>'
+		html : '<p>' + data.inviteMessage + '</p><p>Username: ' + data.username + '</p><p>Password: ' + data.password + '</p><p>Signin <a href="http://localhost:8080/authentication/signin">here</a> to get started!</p>'
 	};
 
 	//Use defined transporter to send mail with mail options
@@ -55,10 +55,13 @@ exports.sendMail = function (req, res) {
 	});
 
 	//Save a "temporary user" entry into the corresponding database
-	var invitee = new TempUser({
+	var invitee = new User({
+		provider: 'local',
 		email: data.inviteEmail,
 		username: data.username,
 		password: data.password,
+		firstName: data.username,
+		lastName: data.username,
 		created: Date.now()
 	});
 	invitee.save(function (err, invitee) {
