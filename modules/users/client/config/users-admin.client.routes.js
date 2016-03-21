@@ -12,6 +12,14 @@ angular.module('users.admin.routes').config(['$stateProvider',
           roles: ['user', 'admin', 'recruiter']
         }
       })
+	  .state('admin.connections', {
+        url: '/connections',
+        templateUrl: 'modules/users/client/views/admin/list-connections.client.view.html',
+        controller: 'UserConnectionsController',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
+      })
       .state('admin.users', {
         url: '/users',
         templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
