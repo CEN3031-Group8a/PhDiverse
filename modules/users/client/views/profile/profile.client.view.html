@@ -32,13 +32,13 @@
 						  <a ng-href="{{curriculumVitaeURL}}" ng-hide="curriculumVitaeURL=='modules/users/client/img/profile/default.png'" target="_self" download="CV.pdf">Download</a>
 					</div>
 					<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.publications.length">
-						Publications
+						<p>Publications</p>
 						<li class="form-group" ng-repeat="publication in user.publications">
 							<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
 						</li>
 					</div>
 					<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.videos.length">
-						Videos
+						<p>Videos</p>
 						<li class="form-group" ng-repeat="video in user.videos">
 							<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
 						</li>
