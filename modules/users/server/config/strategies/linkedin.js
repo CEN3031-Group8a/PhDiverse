@@ -33,10 +33,11 @@ module.exports = function (config) {
       provider: 'linkedin',
       providerIdentifierField: 'id',
       providerData: providerData,
-      bio: 'summary'
+      bio: providerData.summary
     };
 
-    // Save the user OAuth profile
+
+      // Save the user OAuth profile
     users.saveOAuthUserProfile(req, providerUserProfile, done);
   }));
 };
