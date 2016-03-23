@@ -1,21 +1,72 @@
 <section>
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 ng-bind="user.username"></h1>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})">
-          <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" ng-click="remove();" ng-if="user._id !== authentication.user._id">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
+    <section class="row" ng-controller="EditProfileController" ng-init="init(user)">
+	  <div class="row">
+		  <fieldset>
+			<section class="row" ng-controller="ChangeProfilePictureController" ng-init="init(user)">
+				<div>
+					<img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-responsive post-content">
+					<div class ="user-profile-info">
+						<div>
+							<div><br></div>
+							<div>
+								<div>
+									<a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})" ng-hide="authentication.user.roles[0] !== 'admin'">
+										<i class="glyphicon glyphicon-edit"></i>
+									</a>
+									<a class="btn btn-primary" ng-click="remove();" ng-if="user._id !== authentication.user._id" ng-hide="authentication.user.roles[0] !== 'admin'">
+										<i class="glyphicon glyphicon-trash"></i>
+									</a>
+									<a class="btn btn-primary" ng-click="add();" ng-show="user._id !== authentication.user._id && !(user.requests.indexOf(authentication.user._id) > -1) && !(user.connections.indexOf(authentication.user._id) > -1)">
+										<i class="glyphicon glyphicon-plus"></i> Add Colleague
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="page-header">
+						  <h1>About</h1>
+						</div>
+						<div class="form-group" style="padding-bottom:10px;">
+						  <br>
+						  <h4>Professional Profile</h4>
+						</div>
+						<div class="form-group" style="padding-bottom:10px;" ng-hide="!user.bio">
+						  {{user.bio}}
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.displayName">
+						  Name:    {{user.displayName}}
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.email">
+						  Email:    {{user.email}}
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.institution">
+						  Institution:    {{user.institution}}
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.degree">
+						  Degree:    {{user.degree}}
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-controller="ChangeCurriculumVitaeController"  ng-init="init(user);" ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'">
+							  Curriculum Vitae: 
+							  <a ng-href="{{user.curriculumVitaeURL}}" ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'" target="_self" download="CV.pdf">Download</a>
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.publications.length">
+							<p>Publications</p>
+							<li class="form-group" ng-repeat="publication in user.publications">
+								<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
+							</li>
+						</div>
+						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.videos.length">
+							<p>Videos</p>
+							<li class="form-group" ng-repeat="video in user.videos">
+								<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
+							</li>
+						</div>
+					</div>
+				</div>
+			</section>
+		  </fieldset>
+	  </div>
+	</section>
+  <!--<div class="row">
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-3"><strong>First Name</strong></div>
@@ -47,5 +98,5 @@
         <div class="col-md-6" ng-bind="user.roles"></div>
       </div>
     </div>
-  </div>
+  </div>-->
 </section>

@@ -3,7 +3,17 @@
 /* eslint no-multi-spaces:0, indent:0 */
 angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication',
   function ($scope, $http, $location, Users, Authentication) {
-    $scope.user = Authentication.user;
+    $scope.init = function(user) {
+		//private constructor for controller
+		if(user){
+			$scope.user = user;
+		}
+		else{
+			$scope.user = Authentication.user;
+		}
+	};
+	
+	
 
 	$scope.addToPublications = function (newPublication) {
 		if(newPublication !== '' && typeof newPublication !== 'undefined'){

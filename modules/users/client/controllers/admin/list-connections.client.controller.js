@@ -1,13 +1,13 @@
 'use strict';
 
 /* eslint no-multi-spaces:0, indent:0 */
-angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
-  function ($scope, $filter, Admin) {
+angular.module('users.admin').controller('UserConnectionsController', ['$scope', '$filter', 'Admin', 'Authentication',
+  function ($scope, $filter, Admin, Authentication) {
     Admin.query(function (data) {
       $scope.users = data;
       $scope.buildPager();
     });
-
+	
     $scope.buildPager = function () {
       $scope.pagedItems = [];
       $scope.itemsPerPage = 15;
@@ -16,8 +16,17 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     };
 
     $scope.figureOutItemsToDisplay = function () {
+	  Authentication.user.connections.forEach(function(entry) {
+		$scope.users = $filter('filter')($scope.users, {
+			$: entry
+		});
+	  });
+	  $scope.users = $filter('filter')($scope.users, {
+			_id: '!' + Authentication.user._id
+	  });
+	  console.log('$scope.users: ',$scope.users);
 	  $scope.filteredItems1 = $filter('filter')($scope.users, {
-        displayName: $scope.search
+		displayName: $scope.search
       });
 	  $scope.filteredItems2 = $filter('filter')($scope.users, {
 		email: $scope.search
