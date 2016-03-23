@@ -241,6 +241,7 @@ UserSchema.statics.generateRandomPassphrase = function () {
 
 
 var User = mongoose.model('User', UserSchema);
+var UserEvent = mongoose.model('UserEvent', UserEventSchema);
 
 module.exports = {
   User: User,

@@ -9,26 +9,6 @@ var transporter = nodemailer.createTransport({
 	}
 });
 
-/*
-var data = req.body;
-var mailOpts = {
-
-	from: 'sandbox97a2e5138c3e48169a39e01a85feda91.mailgun.org',
-	to: 'data.email',
-	subject: 'Invite from PhDiverse!',
-	text : 'test message form mailgun',
-	html : '<b>test message form mailgun</b>'
-};
-
-transporter.sendMail(mailOpts, function (err, response) {
-	if (err) {
-	 console.log(err);
-	} else {
-	 console.log('Mail send');
-	}
-});
-*/
-
 var User = require('../../../users/server/models/user.server.model').User;
 
 //Function to send the mail
@@ -63,23 +43,7 @@ exports.sendMail = function (req, res) {
 		transporter.sendMail(mailOpts, function (err, response) {
 			if (err) {
 				console.log(err);
-			} else {
-				console.log('Mail sent');
 			}
 		});
 	});
 };
-
-/*exports.sendMail = function(req, res) {
- 
-	var data = req.body;
- 
-	transporter.sendMail({
-		from: 'noreply@phdiverse.com',
-		to: data.email,
-		subject: 'Invite from PhDiverse!',
-		text: data.contactMsg
-	});
- 
-	res.json(data);
-};*/
