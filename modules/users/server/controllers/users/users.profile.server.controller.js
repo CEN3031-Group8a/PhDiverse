@@ -11,6 +11,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
+  UserEvent = mongoose.model('UserEvent'),
   deep = require('deep-diff'),
   diff = require('deep-diff').diff;
 
@@ -38,15 +39,63 @@ exports.update = function (req, res) {
 	}
 	
 	function findChanges(prevUser, nextUser) {
-	  console.log('prevUser: ',prevUser);
-	  console.log('nextUser: ',nextUser);
+	  var tempItemChanged;
+    var tempNewValue;
+
 	  if(nextUser !== prevUser){
 		  if(nextUser.region !== prevUser.region){
-			  console.log('New user region: ', nextUser.region);
-		  }
-	  }
-	  return;
-	}
+			  tempItemChanged = 'region';
+        tempNewValue = nextUser.region;
+      }
+      if(nextUser.bio !== prevUser.bio){
+        tempItemChanged = 'biography';
+        tempNewValue = nextUser.bio;
+      }
+      if(nextUser.institution !== prevUser.institution){
+        tempItemChanged = 'institution';
+        tempNewValue = nextUser.institution;
+      }
+      if(nextUser.degree !== prevUser.degree){
+        tempItemChanged = 'degree';
+        tempNewValue = nextUser.degree;
+      }
+      /*
+      if(nextUser.curriculumVitae !== prevUser.curriculumVitae){
+        tempItemChanged = 'Curriculum Vitae';
+        tempNewValue = nextUser.curriculumVitae;
+      }
+      if(nextUser.publications !== prevUser.publications){
+        tempItemChanged = 'publications';
+        tempNewValue = nextUser.publications;
+      }
+      if(nextUser.videos !== prevUser.videos){
+        tempItemChanged = 'videos';
+        tempNewValue = nextUser.videos;
+      }
+      */
+
+      //Create event for saving
+      var event1 = new UserEvent({
+        _creator: nextUser._id,
+        itemChanged: tempItemChanged,
+        newValue: tempNewValue,
+        dateCreated: Date.now()
+      });
+
+      //Save event
+      event1.save(function (err) {
+        console.log('*Save function did something!*');
+        //Save event to user's event array
+        nextUser.events.push(event1._id);
+        nextUser.save(function (err){
+          if(err) console.log(err);
+        });
+        if (err) console.log(err);
+      });
+    }
+    return;
+  }
+	  
 
 	asyncCheck().then(function(v) { //asyncCheck() returns a promise
 		if (user) {
@@ -114,6 +163,25 @@ exports.changeProfilePicture = function (req, res) {
                 res.status(400).send(err);
               } else {
                 res.json(user);
+
+                //Create event for profile picture creation
+                var event1 = new UserEvent({
+                  _creator: user._id,
+                  itemChanged: 'profile picture',
+                  newValue: '',
+                  dateCreated: Date.now()
+                });
+
+                //Save profile pic event
+                event1.save(function (err) {
+                  console.log('*Save function did something!*');
+                  //Save event to user's event array
+                  user.events.push(event1._id);
+                  user.save(function (err){
+                    if(err) console.log(err);
+                  });
+                  if (err) console.log(err);
+                });
               }
             });
           }
@@ -159,6 +227,24 @@ exports.changeCurriculumVitae = function (req, res) {
                 res.status(400).send(err);
               } else {
                 res.json(user);
+                //Create event for CV change
+                var event1 = new UserEvent({
+                  _creator: user._id,
+                  itemChanged: 'Curriculum Vitae',
+                  newValue: '',
+                  dateCreated: Date.now()
+                });
+
+                //Save CV event
+                event1.save(function (err) {
+                  console.log('*Save function did something!*');
+                  //Save event to user's event array
+                  user.events.push(event1._id);
+                  user.save(function (err){
+                    if(err) console.log(err);
+                  });
+                  if (err) console.log(err);
+                });
               }
             });
           }
