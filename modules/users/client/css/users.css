@@ -47,3 +47,10 @@
     overflow:auto;
     display:block;
 }
+
+.post-content-list {
+	float: left;
+    margin-right: 20px;
+    clear:both;
+	max-width: 80px;
+}
