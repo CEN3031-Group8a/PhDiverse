@@ -34,3 +34,23 @@
   min-height: 150px;
   max-height: 150px;
 }
+
+.post-content {
+	float: left;
+    margin-right: 70px;
+    clear:both;
+	max-width: 800px;
+}
+
+.user-profile-info {
+	margin-left: 0px;
+    overflow:auto;
+    display:block;
+}
+
+.post-content-list {
+	float: left;
+    margin-right: 20px;
+    clear:both;
+	max-width: 80px;
+}

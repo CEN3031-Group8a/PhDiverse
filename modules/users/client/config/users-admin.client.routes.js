@@ -1,13 +1,29 @@
 'use strict';
-
+/* eslint no-multi-spaces:0, indent:0 */
 // Setting up route
 angular.module('users.admin.routes').config(['$stateProvider',
   function ($stateProvider) {
     $stateProvider
+	   .state('admin.search', {
+        url: '/users-search',
+        templateUrl: 'modules/users/client/views/admin/list-users-search.client.view.html',
+        controller: 'UserListController',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
+      })
+	  .state('admin.connections', {
+        url: '/connections',
+        templateUrl: 'modules/users/client/views/admin/list-connections.client.view.html',
+        controller: 'UserConnectionsController',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
+      })
       .state('admin.users', {
         url: '/users',
         templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
-        controller: 'UserListController',
+        controller: 'UserListAdminController',
         data: {
           roles: ['user', 'admin', 'recruiter']
         }

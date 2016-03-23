@@ -37,6 +37,10 @@ angular.module('users').config(['$stateProvider',
         url: '/curriculumvitae',
         templateUrl: 'modules/users/client/views/settings/change-curriculum-vitae.client.view.html'
       })
+	  .state('settings.add-connections', {
+        url: '/add-connections',
+        templateUrl: 'modules/users/client/views/admin/add-connections.client.view.html'
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',
