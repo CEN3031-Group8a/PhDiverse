@@ -57,4 +57,11 @@
 }
 .img-thumbnail{
   margin-top: 60px;
+=======
+.post-content-list {
+	float: left;
+    margin-right: 20px;
+    clear:both;
+	max-width: 80px;
+>>>>>>> d286f660f60e931013ef138b3f69650ab03d91c3
 }
