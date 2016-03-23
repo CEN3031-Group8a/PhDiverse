@@ -42,7 +42,7 @@ exports.sendMail = function (req, res) {
 		subject: 'Invitation from PhDiverse!',
 		text : data.inviteMessage,
 //        html : '<p>Hello! You\'ve been invited to PhDiverse! <a href="http://localhost:3000/authentication/signup">Link to sign up!</a></p>'
-		html : '<p>' + data.inviteMessage + '</p><p>Username: ' + data.username + '</p><p>Password: ' + data.password + '</p><p>Signin <a href="http://localhost:8080/authentication/signin">here</a> to get started!</p>'
+		html : '<p>' + data.inviteMessage + '</p><p>Username: ' + data.username + '</p><p>Password: ' + data.password + '</p><p>Signin <a href="http://localhost:3000/authentication/signin">here</a> to get started!</p>'
 	};
 
 	//Save a "temporary user" entry into the corresponding database
