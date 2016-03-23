@@ -14,7 +14,7 @@ module.exports = function (config) {
     consumerSecret: config.linkedin.clientSecret,
     callbackURL: config.linkedin.callbackURL,
     passReqToCallback: true,
-    profileFields: ['id', 'first-name', 'last-name', 'email-address', 'picture-url']
+    profileFields: ['id', 'first-name', 'last-name', 'email-address', 'picture-url', 'summary']
   },
   function (req, accessToken, refreshToken, profile, done) {
     // Set the provider data and include tokens
@@ -32,10 +32,12 @@ module.exports = function (config) {
       profileImageURL: (providerData.pictureUrl) ? providerData.pictureUrl : undefined,
       provider: 'linkedin',
       providerIdentifierField: 'id',
-      providerData: providerData
+      providerData: providerData,
+      bio: providerData.summary
     };
 
-    // Save the user OAuth profile
+
+      // Save the user OAuth profile
     users.saveOAuthUserProfile(req, providerUserProfile, done);
   }));
 };

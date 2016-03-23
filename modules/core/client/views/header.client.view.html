@@ -24,9 +24,11 @@
       <li ng-class="{ active: $state.includes('admin.search') }"><a ui-sref="admin.search">Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
-      <li ui-sref-active="active">
+      <!-- element removed until signup functionality should be allowed by the app -->
+<!--      <li ui-sref-active="active">
         <a ui-sref="authentication.signup">Sign Up</a>
       </li>
+-->
       <li class="divider-vertical"></li>
       <li ui-sref-active="active">
         <a ui-sref="authentication.signin">Sign In</a>

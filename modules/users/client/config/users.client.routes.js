@@ -29,11 +29,11 @@ angular.module('users').config(['$stateProvider',
         url: '/accounts',
         templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
       })
-	  .state('settings.picture', {
-		  url: '/picture',
-		  templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
-	  })
-	  .state('settings.currvit', {
+  	  .state('settings.picture', {
+  		  url: '/picture',
+  		  templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
+  	  })
+  	  .state('settings.currvit', {
         url: '/curriculumvitae',
         templateUrl: 'modules/users/client/views/settings/change-curriculum-vitae.client.view.html'
       })
@@ -48,7 +48,10 @@ angular.module('users').config(['$stateProvider',
       })
       .state('authentication.signup', {
         url: '/signup',
-        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html'
+        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html',
+        data: {
+          roles: ['admin']
+        }
       })
       .state('authentication.signin', {
         url: '/signin?err',
