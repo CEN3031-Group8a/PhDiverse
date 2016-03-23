@@ -45,15 +45,6 @@ exports.sendMail = function (req, res) {
 		html : '<p>' + data.inviteMessage + '</p><p>Username: ' + data.username + '</p><p>Password: ' + data.password + '</p><p>Signin <a href="http://localhost:8080/authentication/signin">here</a> to get started!</p>'
 	};
 
-	//Use defined transporter to send mail with mail options
-	transporter.sendMail(mailOpts, function (err, response) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('Mail sent');
-		}
-	});
-
 	//Save a "temporary user" entry into the corresponding database
 	var invitee = new User({
 		provider: 'local',
@@ -65,7 +56,17 @@ exports.sendMail = function (req, res) {
 		created: Date.now()
 	});
 	invitee.save(function (err, invitee) {
-		if (err) return console.error(err);
+		if (err) {
+			return console.error(err);
+		}
+		//Use defined transporter to send mail with mail options
+		transporter.sendMail(mailOpts, function (err, response) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log('Mail sent');
+			}
+		});
 	});
 };
 

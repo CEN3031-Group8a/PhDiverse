@@ -58,7 +58,7 @@ angular.module('invite').controller('InviteController', ['$scope', '$stateParams
 				$scope.error = response.message;
 			});
 			
-			$scope.inviteEmail = '';   
+			$scope.inviteEmail = '';
 		};
 	}
 ]);
