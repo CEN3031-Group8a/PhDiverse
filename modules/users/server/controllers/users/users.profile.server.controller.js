@@ -60,10 +60,6 @@ exports.update = function (req, res) {
         tempNewValue = nextUser.degree;
       }
       /*
-      if(nextUser.curriculumVitae !== prevUser.curriculumVitae){
-        tempItemChanged = 'Curriculum Vitae';
-        tempNewValue = nextUser.curriculumVitae;
-      }
       if(nextUser.publications !== prevUser.publications){
         tempItemChanged = 'publications';
         tempNewValue = nextUser.publications;
@@ -86,7 +82,7 @@ exports.update = function (req, res) {
       event1.save(function (err) {
         console.log('*Save function did something!*');
         //Save event to user's event array
-        nextUser.events.push(event1._id);
+        nextUser.events.push(event1);
         nextUser.save(function (err){
           if(err) console.log(err);
         });

@@ -113,7 +113,16 @@ var UserSchema = new Schema({
   },
   requests: [ { type: String, ref: 'User' } ],
   connections: [ { type: String, ref: 'User' } ],
-  events: [{ type: String, ref: 'UserEvent' }]
+  events: [{
+    _creator: String,
+    itemChanged: String,
+    newValue: String,
+    dateCreated: {
+      type: Date,
+      default: Date.now
+    }
+  }]
+
 });
 
 //Event schema
