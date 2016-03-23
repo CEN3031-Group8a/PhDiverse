@@ -9,14 +9,18 @@
           <input type="email" id="email" name="email" class="form-control" ng-model="inviteEmail" placeholder="Email">
         </div>
 
-        
-        
         <div class="text-center form-group">
           <button ng-click="sendMail()" ng-disabled="!inviteEmail.length" class="btn btn-primary">Invite</button>
         </div>
-        <div ng-show="error" class="text-center text-danger">
-          <strong ng-bind="error"></strong>
+        
+        <div ng-messages="userForm.email.$error" role="alert">
+          <p class="help-block error-text" ng-message="nonunique">Email address already exists.</p>
         </div>
+
+        <alert type="danger" ng-show="error" class="text-center text-danger">
+          <span ng-bind="error"></span>
+        </alert>
+
       </fieldset>
     </form>
   </div>

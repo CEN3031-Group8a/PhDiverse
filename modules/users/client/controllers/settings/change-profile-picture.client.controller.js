@@ -1,9 +1,18 @@
 'use strict';
-
+/* eslint indent:0 */
 angular.module('users').controller('ChangeProfilePictureController', ['$scope', '$timeout', '$window', 'Authentication', 'FileUploader',
   function ($scope, $timeout, $window, Authentication, FileUploader) {
-    $scope.user = Authentication.user;
-    $scope.imageURL = $scope.user.profileImageURL;
+    $scope.init = function(user) {
+		//private constructor for controller
+		if(user){
+			$scope.user = user;
+			$scope.imageURL = $scope.user.profileImageURL;
+		}
+		else{
+			$scope.user = Authentication.user;
+			$scope.imageURL = $scope.user.profileImageURL;
+		}
+	};
 
     // Create file uploader instance
     $scope.uploader = new FileUploader({

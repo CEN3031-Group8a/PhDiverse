@@ -7,6 +7,9 @@ angular.module('invite').config(['$stateProvider',
       .state('invite', {
         url: '/invite',
         templateUrl: 'modules/invite/client/views/invite.client.view.html',
+        data: {
+          roles: ['admin']
+        }
       });
   }
 ]);

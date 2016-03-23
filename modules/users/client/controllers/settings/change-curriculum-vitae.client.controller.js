@@ -2,8 +2,17 @@
 /* eslint indent:0 */
 angular.module('users').controller('ChangeCurriculumVitaeController', ['$scope', '$timeout', '$http', '$window', 'Authentication', 'FileUploader', '$sce',
   function ($scope, $timeout, $http, $window, Authentication, FileUploader, $sce) {
-    $scope.user = Authentication.user;
-    $scope.curriculumVitaeURL = $scope.user.curriculumVitaeURL;
+    $scope.init = function(user) {
+		//private constructor for controller
+		if(user){
+			$scope.user = user;
+			$scope.curriculumVitaeURL = $scope.user.curriculumVitaeURL;
+		}
+		else{
+			$scope.user = Authentication.user;
+			$scope.curriculumVitaeURL = $scope.user.curriculumVitaeURL;
+		}
+	};
 
     // Create file uploader instance
     $scope.uploader = new FileUploader({

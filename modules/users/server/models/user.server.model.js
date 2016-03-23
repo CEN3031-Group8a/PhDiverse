@@ -110,6 +110,29 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  requests: [ { type: String, ref: 'User' } ],
+  connections: [ { type: String, ref: 'User' } ],
+  events: [{
+    _creator: String,
+    itemChanged: String,
+    newValue: String,
+    dateCreated: {
+      type: Date,
+      default: Date.now
+    }
+  }]
+
+});
+
+//Event schema
+var UserEventSchema = new Schema({
+  _creator: { type: String, ref: 'User' },
+  itemChanged: String,
+  newValue: String,
+  dateCreated: {
+    type: Date,
+    default: Date.now
   }
 });
 
@@ -216,4 +239,11 @@ UserSchema.statics.generateRandomPassphrase = function () {
   });
 };
 
-mongoose.model('User', UserSchema);
+
+var User = mongoose.model('User', UserSchema);
+var UserEvent = mongoose.model('UserEvent', UserEventSchema);
+
+module.exports = {
+  User: User,
+// TempUser: TempUser,
+};
