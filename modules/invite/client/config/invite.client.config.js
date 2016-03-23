@@ -7,7 +7,7 @@ angular.module('invite').run(['Menus',
     Menus.addMenuItem('topbar', {
       title: 'Invite New Member',
       state: 'invite',
-      roles: ['*']
+      roles: ['admin']
     });
   }
 ]);
