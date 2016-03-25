@@ -1,8 +1,8 @@
 'use strict';
 
 /* eslint no-multi-spaces:0, indent:0 */
-angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-  function ($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication', '$window',
+  function ($scope, $http, $location, Users, Authentication, $window) {
     $scope.init = function(user) {
 		//private constructor for controller
 		if(user){
@@ -54,6 +54,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
         $scope.success = true;
         Authentication.user = response;
+		$window.location.reload(true);
       }, function (response) {
         $scope.error = response.data.message;
       });

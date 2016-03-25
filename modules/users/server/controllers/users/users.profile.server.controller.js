@@ -37,61 +37,6 @@ exports.update = function (req, res) {
 		});	
 	  });
 	}
-	
-	function findChanges(prevUser, nextUser) {
-	  var tempItemChanged;
-    var tempNewValue;
-
-	  if(nextUser !== prevUser){
-		  if(nextUser.region !== prevUser.region){
-			  tempItemChanged = 'region';
-        tempNewValue = nextUser.region;
-      }
-      if(nextUser.bio !== prevUser.bio){
-        tempItemChanged = 'biography';
-        tempNewValue = nextUser.bio;
-      }
-      if(nextUser.institution !== prevUser.institution){
-        tempItemChanged = 'institution';
-        tempNewValue = nextUser.institution;
-      }
-      if(nextUser.degree !== prevUser.degree){
-        tempItemChanged = 'degree';
-        tempNewValue = nextUser.degree;
-      }
-      /*
-      if(nextUser.publications !== prevUser.publications){
-        tempItemChanged = 'publications';
-        tempNewValue = nextUser.publications;
-      }
-      if(nextUser.videos !== prevUser.videos){
-        tempItemChanged = 'videos';
-        tempNewValue = nextUser.videos;
-      }
-      */
-
-      //Create event for saving
-      var event1 = new UserEvent({
-        _creator: nextUser._id,
-        itemChanged: tempItemChanged,
-        newValue: tempNewValue,
-        dateCreated: Date.now()
-      });
-
-      //Save event
-      event1.save(function (err) {
-        console.log('*Save function did something!*');
-        //Save event to user's event array
-        nextUser.events.push(event1);
-        nextUser.save(function (err){
-          if(err) console.log(err);
-        });
-        if (err) console.log(err);
-      });
-    }
-    return;
-  }
-	  
 
 	asyncCheck().then(function(v) { //asyncCheck() returns a promise
 		if (user) {
@@ -99,7 +44,48 @@ exports.update = function (req, res) {
 			user = _.extend(user, req.body);
 			user.updated = Date.now();
 			user.displayName = user.firstName + ' ' + user.lastName;
+			
+			//Finding differences
+			var tempItemChanged;
+			var tempNewValue;
 
+		    if(user !== oldUser){
+				if(user.region !== oldUser.region){
+					tempItemChanged = 'region';
+			        tempNewValue = user.region;
+				}
+			    if(user.bio !== oldUser.bio){
+					tempItemChanged = 'biography';
+					tempNewValue = user.bio;
+				}
+				if(user.institution !== oldUser.institution){
+					tempItemChanged = 'institution';
+					tempNewValue = user.institution;
+				}
+				if(user.degree !== oldUser.degree){
+					tempItemChanged = 'degree';
+					tempNewValue = user.degree;
+				}
+				/*if(user.publications !== oldUser.publications){
+					tempItemChanged = 'publications';
+					tempNewValue = user.publications;
+				}
+				if(user.videos !== oldUser.videos){
+					tempItemChanged = 'videos';
+					tempNewValue = user.videos;
+				}*/
+
+				//Create event for saving
+				var event1 = new UserEvent({
+					_creator: user._id,
+					itemChanged: tempItemChanged,
+					newValue: tempNewValue,
+					dateCreated: Date.now()
+				});
+				oldUser.events.push(event1);
+				user.events.push(event1);
+			}
+			  
 			user.save(function (err) {
 			  if (err) {
 				return res.status(400).send({
@@ -111,8 +97,6 @@ exports.update = function (req, res) {
 					res.status(400).send(err);
 				  } else {
 					res.json(user);
-					updatedUser = user;
-					findChanges(oldUser, updatedUser);
 				  }
 				});
 			  }
@@ -170,7 +154,6 @@ exports.changeProfilePicture = function (req, res) {
 
                 //Save profile pic event
                 event1.save(function (err) {
-                  console.log('*Save function did something!*');
                   //Save event to user's event array
                   user.events.push(event1._id);
                   user.save(function (err){
@@ -233,7 +216,6 @@ exports.changeCurriculumVitae = function (req, res) {
 
                 //Save CV event
                 event1.save(function (err) {
-                  console.log('*Save function did something!*');
                   //Save event to user's event array
                   user.events.push(event1._id);
                   user.save(function (err){
