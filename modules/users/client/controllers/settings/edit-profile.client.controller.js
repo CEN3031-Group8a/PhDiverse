@@ -37,6 +37,15 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 		$scope.user.videos.splice(index, 1);
 	};
 	
+	$scope.addToPosts = function (newPost) {
+		console.log('newPost: ', newPost);
+		if(newPost !== '' && typeof newPost !== 'undefined'){
+			console.log('addToPosts if entered');
+			$scope.user.posts.push(newPost);
+			$scope.newPost = {};
+		}
+	};
+	
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;
