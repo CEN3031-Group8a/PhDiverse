@@ -122,7 +122,7 @@ var UserSchema = new Schema({
       default: Date.now
     }
   }],
-  posts : [ { thought: { type: String } } ]
+  posts : [ { thought: { type: String }, authorID: { type: String } } ]
 
 });
 

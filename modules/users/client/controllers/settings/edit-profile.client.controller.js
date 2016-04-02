@@ -39,6 +39,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 	
 	$scope.addToPosts = function (newPost, newForm) {
 		if(newPost !== '' && typeof newPost !== 'undefined'){
+			newPost.authorID = Authentication.user._id;
 			$scope.user.posts.push(newPost);
 			$scope.newPost = {};
 			$scope.updateUserProfile(newForm);
@@ -47,6 +48,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 	
 	$scope.addToOtherPosts = function (newPost, newForm) {
 		if(newPost !== '' && typeof newPost !== 'undefined'){
+			newPost.authorID = Authentication.user._id;
 			$scope.user.posts.push(newPost);
 			$scope.newPost = {};
 			var user = new Users($scope.user);
