@@ -66,12 +66,10 @@
 	  </fieldset>
   </form>
   
-  <!--<div class="container"> -->
   <div class="list-group">
     <div ng-hide="!user.events.length"><h1>Timeline</h1></div>
     <a ng-show="event.itemChanged != null" class="list-group-item" ng-repeat="event in user.events.slice().reverse()" type="event.type" close="user.events.splice(index, 1)">
     	<div><h3>{{user.displayName}}'s {{event.itemChanged}} was updated to {{event.newValue}} on {{event.dateCreated | date}}</h3></div>
     </a>
-  </div>    
-</div>
+  </div>
 </section>

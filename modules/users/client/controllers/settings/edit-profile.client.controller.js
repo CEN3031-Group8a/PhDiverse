@@ -45,6 +45,21 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 		}
 	};
 	
+	$scope.addToOtherPosts = function (newPost, newForm) {
+		if(newPost !== '' && typeof newPost !== 'undefined'){
+			$scope.user.posts.push(newPost);
+			$scope.newPost = {};
+			var user = new Users($scope.user);
+			user.$update(function (response) {
+				$scope.$broadcast('show-errors-reset', 'userForm');
+				$scope.success = true;
+				$window.location.reload(true);
+			}, function (response) {
+				$scope.error = response.data.message;
+			});
+		}
+	};
+	
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;
