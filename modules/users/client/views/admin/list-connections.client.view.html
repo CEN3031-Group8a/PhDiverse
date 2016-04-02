@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="list-group">
-    <a ng-repeat="user in pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item" style="overflow:auto;">
+    <a ng-repeat="user in filteredConns(users)" ui-sref="admin.user({userId: user._id})" class="list-group-item" style="overflow:auto;">
 	  <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-responsive post-content-list">
       <h4 class="list-group-item-heading" ng-bind="user.displayName"></h4>
       <p class="list-group-item-text" ng-bind="user.email"></p>
