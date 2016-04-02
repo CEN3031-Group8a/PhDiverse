@@ -52,8 +52,9 @@
   <form name="userForm" class="signin form-inline" novalidate autocomplete="off" onkeypress="return event.keyCode != 13;">
 	  <fieldset>				
 		<div class="form-group">
-			<input name="newPostSub" ng-model="newPost.thought" type="url" class="form-control" required></input>
-			<button class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToPosts(newPost); updateUserProfile(userForm)">Post</button>
+			<br>
+			<input name="newPostSub" ng-model="newPost.thought" type="text" class="form-control" placeholder="Share your thoughts" style="width:800px;max-width: 85%;" required></input>
+			<button class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToPosts(newPost, userForm)">Post</button>
 		</div>
 		<br><br>
 		<div ng-show="success" class="text-center text-success">

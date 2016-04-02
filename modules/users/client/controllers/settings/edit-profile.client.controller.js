@@ -37,12 +37,11 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 		$scope.user.videos.splice(index, 1);
 	};
 	
-	$scope.addToPosts = function (newPost) {
-		console.log('newPost: ', newPost);
+	$scope.addToPosts = function (newPost, newForm) {
 		if(newPost !== '' && typeof newPost !== 'undefined'){
-			console.log('addToPosts if entered');
 			$scope.user.posts.push(newPost);
 			$scope.newPost = {};
+			$scope.updateUserProfile(newForm);
 		}
 	};
 	
@@ -60,7 +59,6 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'userForm');
-
         $scope.success = true;
         Authentication.user = response;
 		$window.location.reload(true);
