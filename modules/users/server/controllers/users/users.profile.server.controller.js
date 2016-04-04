@@ -22,7 +22,6 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  var oldID = user._id;
   var oldUser = new User();
   var updatedUser = new User();
   
@@ -30,7 +29,7 @@ exports.update = function (req, res) {
 	  // `delay` returns a promise
 	  return new Promise(function(resolve, reject) {
 		// Only `delay` is able to resolve or reject the promise
-		User.findById(oldID, function(err, user) {
+		User.findById(req.body._id, function(err, user) {
 		  if (err) throw err;
 		  oldUser = user;
 		  resolve(7);
@@ -79,25 +78,26 @@ exports.update = function (req, res) {
 					tempNewValue = user.posts[user.posts.length-1].thought;
 				}
 				//Create event for saving
-				var event1;
 				if(tempItemChanged === 'posts'){
-					event1 = new UserEvent({
+					var event1 = new UserEvent({
 						_creator: user.posts[user.posts.length-1].authorID,
 						itemChanged: tempItemChanged,
 						newValue: tempNewValue,
 						dateCreated: Date.now()
 					});
+					oldUser.events.push(event1);
+					user.events.push(event1);
 				}
 				else{
-					event1 = new UserEvent({
+					var event2 = new UserEvent({
 						_creator: user._id,
 						itemChanged: tempItemChanged,
 						newValue: tempNewValue,
 						dateCreated: Date.now()
 					});
+					oldUser.events.push(event2);
+					user.events.push(event2);
 				}
-				oldUser.events.push(event1);
-				user.events.push(event1);
 			}
 			  
 			user.save(function (err) {
