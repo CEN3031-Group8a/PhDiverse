@@ -1,5 +1,4 @@
-<section>
-    <section class="row" ng-controller="EditProfileController" ng-init="init(user)">
+<section class="row" ng-controller="EditProfileController" ng-init="init(user)">
 	  <div class="row">
 		  <fieldset>
 			<section class="row" ng-controller="ChangeProfilePictureController" ng-init="init(user)">
@@ -65,38 +64,26 @@
 			</section>
 		  </fieldset>
 	  </div>
-	</section>
-  <!--<div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-3"><strong>First Name</strong></div>
-        <div class="col-md-6" ng-bind="user.firstName"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Last Name</strong></div>
-        <div class="col-md-6" ng-bind="user.lastName"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Email</strong></div>
-        <div class="col-md-6" ng-bind="user.email"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Provider</strong></div>
-        <div class="col-md-6" ng-bind="user.provider"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="user.created"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Roles</strong></div>
-        <div class="col-md-6" ng-bind="user.roles"></div>
-      </div>
-    </div>
-  </div>-->
+	  <form name="userForm" class="signin form-inline" novalidate autocomplete="off" onkeypress="return event.keyCode != 13;">
+		  <fieldset>				
+			<div class="form-group">
+				<br>
+				<input name="newPostSub" ng-model="newPost.thought" type="text" class="form-control" placeholder="Share your thoughts" style="width:800px;max-width: 85%;" required></input>
+				<button class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToOtherPosts(newPost, userForm)">Post</button>
+			</div>
+			<br><br>
+			<div ng-show="success" class="text-center text-success">
+			  <strong>Post Published Successfully</strong>
+			</div>
+			<div ng-show="error" class="text-center text-danger">
+			  <strong ng-bind="error"></strong>
+			</div>
+		  </fieldset>
+	  </form>
+	  <div class="list-group">
+    <div ng-hide="!user.events.length"><h1>Timeline</h1></div>
+		<a ng-show="event.itemChanged != null" class="list-group-item" ng-repeat="event in user.events.slice().reverse()" type="event.type" close="user.events.splice(index, 1)">
+			<div><h3>{{user.displayName}}'s {{event.itemChanged}} was updated to {{event.newValue}} on {{event.dateCreated | date}}</h3></div>
+		</a>
+	</div>
 </section>
