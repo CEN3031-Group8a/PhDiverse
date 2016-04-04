@@ -79,8 +79,9 @@ exports.update = function (req, res) {
 					tempNewValue = user.posts[user.posts.length-1].thought;
 				}
 				//Create event for saving
+				var event1;
 				if(tempItemChanged === 'posts'){
-					var event1 = new UserEvent({
+					event1 = new UserEvent({
 						_creator: user.posts[user.posts.length-1].authorID,
 						itemChanged: tempItemChanged,
 						newValue: tempNewValue,
@@ -88,7 +89,7 @@ exports.update = function (req, res) {
 					});
 				}
 				else{
-					var event1 = new UserEvent({
+					event1 = new UserEvent({
 						_creator: user._id,
 						itemChanged: tempItemChanged,
 						newValue: tempNewValue,
