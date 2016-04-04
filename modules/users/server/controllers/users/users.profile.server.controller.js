@@ -66,22 +66,36 @@ exports.update = function (req, res) {
 					tempItemChanged = 'degree';
 					tempNewValue = user.degree;
 				}
-				/*if(user.publications !== oldUser.publications){
+				if(user.publications.length > oldUser.publications.length){
 					tempItemChanged = 'publications';
-					tempNewValue = user.publications;
+					tempNewValue = user.publications[user.publications.length-1].link;
 				}
-				if(user.videos !== oldUser.videos){
+				if(user.videos.length > oldUser.videos.length){
 					tempItemChanged = 'videos';
-					tempNewValue = user.videos;
-				}*/
-
+					tempNewValue = user.videos[user.videos.length-1].link;
+				}
+				if(user.posts.length > oldUser.posts.length){
+					tempItemChanged = 'posts';
+					tempNewValue = user.posts[user.posts.length-1].thought;
+				}
 				//Create event for saving
-				var event1 = new UserEvent({
-					_creator: user._id,
-					itemChanged: tempItemChanged,
-					newValue: tempNewValue,
-					dateCreated: Date.now()
-				});
+				var event1;
+				if(tempItemChanged === 'posts'){
+					event1 = new UserEvent({
+						_creator: user.posts[user.posts.length-1].authorID,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+				}
+				else{
+					event1 = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+				}
 				oldUser.events.push(event1);
 				user.events.push(event1);
 			}
@@ -92,13 +106,7 @@ exports.update = function (req, res) {
 				  message: errorHandler.getErrorMessage(err)
 				});
 			  } else {
-				req.login(user, function (err) {
-				  if (err) {
-					res.status(400).send(err);
-				  } else {
-					res.json(user);
-				  }
-				});
+				res.json(user);
 			  }
 			});
 		  } else {
