@@ -43,6 +43,14 @@ angular.module('users.admin.routes').config(['$stateProvider',
           roles: ['user', 'admin', 'recruiter']
         }
       })
+      .state('admin.userfeed', {
+        url: '/userfeed',
+        templateUrl: 'modules/users/client/views/admin/view-userfeed.client.view.html',
+        controller: 'UserFeedController',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
+      })
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',

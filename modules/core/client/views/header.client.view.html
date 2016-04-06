@@ -6,11 +6,12 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="home" class="navbar-brand">PhDiverse</a>
+    <a ui-sref="home" class="navbar-brand" ng-hide="authentication.user">PhDiverse</a>
+	<a ui-sref="admin.userfeed" class="navbar-brand" ng-show="authentication.user">PhDiverse</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
-      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state) && !$state.includes('admin.search') && !$state.includes('admin.user')  && !$state.includes('admin.connections'), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
+      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state) && !$state.includes('admin.search') && !$state.includes('admin.user')  && !$state.includes('admin.connections') && !$state.includes('admin.userfeed'), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu">
           <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
@@ -21,7 +22,7 @@
       </li>
     </ul>
 	<ul class="nav navbar-nav">
-      <li ng-class="{ active: $state.includes('admin.search') }"><a ui-sref="admin.search">Search</a></li>
+      <li ng-class="{ active: $state.includes('admin.search') }" ng-show="authentication.user"><a ui-sref="admin.search">Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <!-- element removed until signup functionality should be allowed by the app -->

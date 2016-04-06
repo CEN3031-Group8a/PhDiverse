@@ -1,0 +1,16 @@
+<section class="row" ng-controller="EditProfileController" ng-init="init(user)">
+	<div class="page-header">
+		<div class="row">
+		  <div class="col-md-4">
+			<h1>User Feed</h1>
+		  </div>
+		</div>
+	</div>
+	<div class="list-group" ng-controller="UserFeedController">
+		<a class="list-group-item" ng-repeat="event in userFeed | orderBy:'-dateCreated' track by $index" ui-sref="admin.user({userId: event._creator})" style="overflow:auto;">
+			<img ng-src="{{getUser(event._creator)[0].profileImageURL}}" alt="{{getUser(event._creator)[0].displayName}}" class="img-responsive post-content-list">
+			<div ng-show="event.itemChanged !== 'posts'"><h3>{{getUser(event._creator)[0].displayName}}'s {{event.itemChanged}} was updated to {{event.newValue}} on {{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h3></div>
+			<div ng-show="event.itemChanged === 'posts'"><h3>{{getUser(event._creator)[0].displayName}}  posted {{event.newValue}} on {{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h3></div>
+		</a>
+	</div>
+</section>
