@@ -22,7 +22,9 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  var oldID = user._id;
+  if (user) {
+    var oldID = user._id;
+  }
   var oldUser = new User();
   var updatedUser = new User();
   
@@ -109,11 +111,11 @@ exports.update = function (req, res) {
 				res.json(user);
 			  }
 			});
-		  } else {
+		} else {
 			res.status(400).send({
 			  message: 'User is not signed in'
 			});
-		  }
+		}
 	});
 };
 

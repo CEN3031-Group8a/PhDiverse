@@ -56,7 +56,7 @@ describe('Send email invite test', function () {
         }
 
         // Request invite page
-        agent.get('/api/invite')
+        agent.get('/api/invite') //problem line because /api/invite does not exist....
           .expect(403)
           .end(function (usersGetErr, usersGetRes) {
             if (usersGetErr) {

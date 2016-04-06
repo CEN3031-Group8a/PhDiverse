@@ -9,7 +9,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/list-users-search.client.view.html',
         controller: 'UserListController',
         data: {
-          roles: ['user', 'admin', 'recruiter']
+          roles: ['admin']
         }
       })
 	  .state('admin.connections', {
@@ -17,7 +17,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/list-connections.client.view.html',
         controller: 'UserConnectionsController',
         data: {
-          roles: ['user', 'admin', 'recruiter']
+          roles: ['admin']
         }
       })
       .state('admin.users', {
@@ -25,7 +25,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListAdminController',
         data: {
-          roles: ['user', 'admin', 'recruiter']
+          roles: ['admin']
         }
       })
       .state('admin.user', {
@@ -40,7 +40,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
           }]
         },
         data: {
-          roles: ['user', 'admin', 'recruiter']
+          roles: ['admin']
         }
       })
       .state('admin.user-edit', {
@@ -53,6 +53,9 @@ angular.module('users.admin.routes').config(['$stateProvider',
               userId: $stateParams.userId
             });
           }]
+        },
+        data: {
+          roles: ['admin']
         }
       });
   }

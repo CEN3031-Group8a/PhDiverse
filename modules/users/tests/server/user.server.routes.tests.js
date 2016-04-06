@@ -100,7 +100,7 @@ describe('User CRUD tests', function () {
 
             // NodeJS v4 changed the status code representation so we must check
             // before asserting, to be comptabile with all node versions.
-            if (process.version.indexOf('v4') === 0) {
+            if (process.version.indexOf('v4') === 0 || process.version.indexOf('v5') === 0) {
               signoutRes.text.should.equal('Found. Redirecting to /');
             } else {
               signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
@@ -112,6 +112,8 @@ describe('User CRUD tests', function () {
   });
 
   it('should not be able to retrieve a list of users if not admin', function (done) {
+    user.roles = ['user'];
+    
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -674,7 +676,7 @@ describe('User CRUD tests', function () {
           var userUpdate = {
             firstName: 'user_update_first',
             lastName: 'user_update_last',
-            roles: ['user', 'admin']
+            roles: ['user']
           };
 
           agent.put('/api/users')
