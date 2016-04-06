@@ -11,9 +11,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
-  UserEvent = mongoose.model('UserEvent'),
-  deep = require('deep-diff'),
-  diff = require('deep-diff').diff;
+  UserEvent = mongoose.model('UserEvent');
 
 
 /**
