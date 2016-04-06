@@ -48,7 +48,7 @@ exports.update = function (req, res) {
 			var tempItemChanged;
 			var tempNewValue;
 
-		    if(user !== oldUser){
+		    if((user !== oldUser) && (String(user._id) === String(oldUser._id))){
 				var tempEvent;
 				if(user.region !== oldUser.region){
 					tempItemChanged = 'region';
