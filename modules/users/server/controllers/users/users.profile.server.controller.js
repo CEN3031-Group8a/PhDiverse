@@ -49,36 +49,93 @@ exports.update = function (req, res) {
 			var tempNewValue;
 
 		    if(user !== oldUser){
+				var tempEvent;
 				if(user.region !== oldUser.region){
 					tempItemChanged = 'region';
 			        tempNewValue = user.region;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 			    if(user.bio !== oldUser.bio){
 					tempItemChanged = 'biography';
 					tempNewValue = user.bio;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 				if(user.institution !== oldUser.institution){
 					tempItemChanged = 'institution';
 					tempNewValue = user.institution;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 				if(user.degree !== oldUser.degree){
 					tempItemChanged = 'degree';
 					tempNewValue = user.degree;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 				if(user.publications.length > oldUser.publications.length){
 					tempItemChanged = 'publications';
 					tempNewValue = user.publications[user.publications.length-1].link;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 				if(user.videos.length > oldUser.videos.length){
 					tempItemChanged = 'videos';
 					tempNewValue = user.videos[user.videos.length-1].link;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 				if(user.posts.length > oldUser.posts.length){
 					tempItemChanged = 'posts';
 					tempNewValue = user.posts[user.posts.length-1].thought;
+					tempEvent = new UserEvent({
+						_creator: user.posts[user.posts.length-1].authorID,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
 				//Create event for saving
-				if(tempItemChanged === 'posts'){
+				/*if(tempItemChanged === 'posts'){
 					var event1 = new UserEvent({
 						_creator: user.posts[user.posts.length-1].authorID,
 						itemChanged: tempItemChanged,
@@ -97,7 +154,7 @@ exports.update = function (req, res) {
 					});
 					oldUser.events.push(event2);
 					user.events.push(event2);
-				}
+				}*/
 			}
 			  
 			user.save(function (err) {

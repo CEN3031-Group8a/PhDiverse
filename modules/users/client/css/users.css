@@ -58,3 +58,10 @@
     clear:both;
 	max-width: 80px;
 }
+
+.post-content-list-feed {
+	float: left;
+    margin-right: 20px;
+    clear:both;
+	width: 120px;
+}

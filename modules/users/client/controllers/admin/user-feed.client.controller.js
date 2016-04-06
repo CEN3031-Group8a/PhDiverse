@@ -41,7 +41,7 @@ angular.module('users.admin').controller('UserFeedController', ['$scope', '$filt
 	
 	$scope.getUser = function(userID) {
 		if(userID !== undefined){
-			var res = $scope.users.filter(function( obj ) {
+			var res = $scope.users.filter(function(obj) {
 			  return obj._id === userID;
 			});
 			return res;
@@ -49,3 +49,9 @@ angular.module('users.admin').controller('UserFeedController', ['$scope', '$filt
 	};
   }
 ]);
+
+angular.module('users.admin').filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    };
+});

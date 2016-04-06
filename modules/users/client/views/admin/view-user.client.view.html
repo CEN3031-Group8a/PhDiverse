@@ -83,7 +83,17 @@
 	  <div class="list-group">
     <div ng-hide="!user.events.length"><h1>Timeline</h1></div>
 		<a ng-show="event.itemChanged != null" class="list-group-item" ng-repeat="event in user.events.slice().reverse()" type="event.type" close="user.events.splice(index, 1)">
-			<div><h3>{{user.displayName}}'s {{event.itemChanged}} was updated to {{event.newValue}} on {{event.dateCreated | date}}</h3></div>
+			<div ng-show="event.itemChanged !== 'posts'">
+				<h4 class="list-group-item-heading" ng-bind="user.displayName"></h4>
+				<h6 class="list-group-item-heading">{{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h6>
+				<p>{{event.itemChanged  | capitalize}} updated to:</p>
+				<p class="list-group-item" style="overflow:auto;margin-left=30px;">{{event.newValue}}</p>
+			</div>
+			<div ng-show="event.itemChanged === 'posts'" style="overflow:auto;">
+				<h4 class="list-group-item-heading" ng-bind="user.displayName"></h4>
+				<h6 class="list-group-item-heading">{{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h6>
+				<p class="list-group-item-text">{{event.newValue}}</p>
+			</div>
 		</a>
 	</div>
 </section>
