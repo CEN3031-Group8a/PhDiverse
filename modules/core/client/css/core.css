@@ -52,16 +52,6 @@ a:hover .header-profile-image {
     z-index:1;
 }
 
-.nav {
-	color: #2affcc;
-	background-color: #067fff; 
-	border-color: #012040;
-}
-.nav:active, .nav:hover, .nav:focus {
-	color: #2affcc;
-	background-color: #012040; 
-	border-color: #012040;
-}
 .navbar-brand {
 	color: #2affcc;
 }

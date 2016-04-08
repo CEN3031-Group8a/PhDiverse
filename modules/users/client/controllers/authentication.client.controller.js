@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint no-multi-spaces:0, indent:0 */
 angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator',
   function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
     $scope.authentication = Authentication;
@@ -65,20 +66,16 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
   }
 ]);
 
-angular.module('users').directive('focus',
-function($timeout) {
- return {
- scope : {
-   trigger : '@focus'
- },
- link : function(scope, element) {
-  scope.$watch('trigger', function(value) {
-    if (value === "true") {
-      $timeout(function() {
-       element[0].focus();
-      });
-   }
- });
- }
-};
+angular.module('users').directive('focus', function($timeout) {
+	return {
+		scope : { trigger : '@focus' }, link : function(scope, element) {
+			scope.$watch('trigger', function(value) {
+				if (value === "true") {
+					$timeout(function() {
+						element[0].focus();
+					});
+				}
+			});
+		}
+	};
 });
