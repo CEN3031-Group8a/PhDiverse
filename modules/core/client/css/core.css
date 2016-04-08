@@ -51,3 +51,48 @@ a:hover .header-profile-image {
     opacity: 0.8;
     z-index:1;
 }
+
+.nav {
+	color: #2affcc;
+	background-color: #067fff; 
+	border-color: #012040;
+}
+.nav:active, .nav:hover, .nav:focus {
+	color: #2affcc;
+	background-color: #012040; 
+	border-color: #012040;
+}
+.navbar-brand {
+	color: #2affcc;
+}
+.navbar-brand:active, .navbar-brand:hover, .navbar-brand:focus {
+	color: #2affcc;
+	background-color: #067fff; 
+	border-color: #012040;
+}
+.navbar-nav {
+	color: #2affcc;
+	background-color: #067fff; 
+	border-color: #012040;
+}
+.navbar-nav:active, .navbar-nav:hover, .navbar-nav:focus {
+	color: #012040;
+	background-color: #012040; 
+	border-color: #012040;
+}
+.dropdown-toggle {
+	color: #2affcc;
+	background-color: #067fff; 
+	border-color: #012040;
+}
+.dropdown-toggle:active, .dropdown-toggle:hover, .dropdown-toggle:visited {
+	color: #012040;
+	background-color: #012040; 
+	border-color: #012040;
+}
+.open .dropdown-toggle,
+a:active .dropdown-toggle {
+  	color: #012040;
+	background-color: #012040; 
+	border-color: #012040;
+}
