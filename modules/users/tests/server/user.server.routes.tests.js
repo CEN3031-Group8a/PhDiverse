@@ -111,7 +111,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to retrieve a list of users if not admin', function (done) {
+  it('should be able to retrieve a list of users without the additional admin functionality if not admin', function (done) {
     user.roles = ['user'];
     
     agent.post('/api/auth/signin')
@@ -125,7 +125,7 @@ describe('User CRUD tests', function () {
 
         // Request list of users
         agent.get('/api/users')
-          .expect(403)
+          .expect(200)
           .end(function (usersGetErr, usersGetRes) {
             if (usersGetErr) {
               return done(usersGetErr);
@@ -556,7 +556,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to change user own password if no new password is at all given', function (done) {
+  it('should not be able to change user own password if not signed-in', function (done) {
 
     // Change password
     agent.post('/api/users/password')
@@ -898,6 +898,73 @@ describe('User CRUD tests', function () {
           });
       });
   });
+
+  it('should not be able to update own user curriculum vitae without being logged-in', function (done) {
+
+    agent.post('/api/users/curriculumvitae')
+      .send({})
+      .expect(400)
+      .end(function (userInfoErr, userInfoRes) {
+        if (userInfoErr) {
+          return done(userInfoErr);
+        }
+
+        userInfoRes.body.message.should.equal('User is not signed in');
+
+        // Call the assertion callback
+        return done();
+      });
+  });
+
+  it('should be able to change curriculum vitae if signed in', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/curriculumvitae')
+          .attach('newCurriculumVitae', './modules/users/client/img/profile/default.pdf')
+          .send(credentials)
+          .expect(200)
+          .end(function (userInfoErr, userInfoRes) {
+            // Handle change profile picture error
+            if (userInfoErr) {
+              return done(userInfoErr);
+            }
+
+            userInfoRes.body.should.be.instanceof(Object);
+            userInfoRes.body.profileImageURL.should.be.a.String();
+            userInfoRes.body._id.should.be.equal(String(user._id));
+
+            return done();
+          });
+      });
+  });
+
+  it('should not be able to change curriculum vitae if attach a document with a different field name', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/curriculumvitae')
+          .attach('fieldThatDoesntWork', './modules/users/client/img/profile/default.pdf')
+          .send(credentials)
+          .expect(400)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
 
   afterEach(function (done) {
     User.remove().exec(done);
