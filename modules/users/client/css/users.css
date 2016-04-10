@@ -66,6 +66,10 @@
 	width: 120px;
 }
 
+.list-group-item {
+	overflow:auto;
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
     text-transform: none;
 }
