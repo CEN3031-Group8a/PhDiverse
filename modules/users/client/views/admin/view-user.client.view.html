@@ -21,9 +21,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="page-header">
-						  <h1>About</h1>
-						</div>
 						<div class="form-group" style="padding-bottom:10px;">
 						  <br>
 						  <h4>Professional Profile</h4>
@@ -31,33 +28,49 @@
 						<div class="form-group" style="padding-bottom:10px;" ng-hide="!user.bio">
 						  {{user.bio}}
 						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.displayName">
-						  Name:    {{user.displayName}}
-						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.email">
-						  Email:    {{user.email}}
-						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.institution">
-						  Institution:    {{user.institution}}
-						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.degree">
-						  Degree:    {{user.degree}}
-						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-controller="ChangeCurriculumVitaeController"  ng-init="init(user);" ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'">
-							  Curriculum Vitae: 
-							  <a ng-href="{{user.curriculumVitaeURL}}" ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'" target="_self" download="CV.pdf">Download</a>
-						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.publications.length">
-							<p>Publications</p>
-							<li class="form-group" ng-repeat="publication in user.publications">
-								<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
-							</li>
-						</div>
-						<div class="form-group" style="padding-bottom:10px; border-bottom: 1px solid #ccc;" ng-hide="!user.videos.length">
-							<p>Videos</p>
-							<li class="form-group" ng-repeat="video in user.videos">
-								<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
-							</li>
+						<div class="table-responsive">
+						  <table class="table">
+							<tbody>
+							  <tr>
+								<td>
+									<div class="form-group" ng-hide="!user.displayName">
+										<b>Name: </b>   {{user.displayName}}
+									</div>
+									<div class="form-group" ng-hide="!user.email">
+										<b>Email: </b>   {{user.email}}
+									</div>
+									<div class="form-group" ng-hide="!user.institution">
+										<b>Institution: </b>   {{user.institution}}
+									</div>
+									<div class="form-group" ng-hide="!user.degree">
+										<b>Degree: </b>   {{user.degree}}
+									</div>
+								</td>
+								<td ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'">
+									<div class="form-group" ng-controller="ChangeCurriculumVitaeController"  ng-init="init(user);" ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'">
+										  <p><b>Curriculum Vitae</b></p>
+										  <li><a ng-href="{{user.curriculumVitaeURL}}" ng-hide="user.curriculumVitaeURL=='modules/users/client/img/profile/default.png'" target="_self" download="CV.pdf">Download</a></li>
+									</div>
+								</td>
+								<td ng-hide="!user.publications.length">
+									<div class="form-group" ng-hide="!user.publications.length">
+										<p><b>Publications</b></p>
+										<li  ng-repeat="publication in user.publications">
+											<a ng-href="{{publication.link}}" target="_blank">{{publication.link}}</a>
+										</li>
+									</div>
+								</td>
+								<td ng-hide="!user.videos.length">
+									<div class="form-group" ng-hide="!user.videos.length">
+										<p><b>Videos</b></p>
+										<li  ng-repeat="video in user.videos">
+											<a ng-href="{{video.link}}" target="_blank">{{video.link}}</a>
+										</li>
+									</div>
+								</td>
+							  </tr>
+							</tbody>
+						  </table>
 						</div>
 					</div>
 				</div>
@@ -80,10 +93,22 @@
 			</div>
 		  </fieldset>
 	  </form>
-	  <div class="list-group">
+	  <div class="list-group" ng-controller="UserFeedController">
     <div ng-hide="!user.events.length"><h1>Timeline</h1></div>
 		<a ng-show="event.itemChanged != null" class="list-group-item" ng-repeat="event in user.events.slice().reverse()" type="event.type" close="user.events.splice(index, 1)">
-			<div><h3>{{user.displayName}}'s {{event.itemChanged}} was updated to {{event.newValue}} on {{event.dateCreated | date}}</h3></div>
+			<div ng-show="event.itemChanged !== 'posts'">
+				<img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-responsive post-content-list-feed">
+				<h4 class="list-group-item-heading" ng-bind="user.displayName"></h4>
+				<h6 class="list-group-item-heading">{{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h6>
+				<p>{{event.itemChanged  | capitalize}} updated to:</p>
+				<p class="list-group-item" style="overflow:auto;margin-left=30px;">{{event.newValue}}</p>
+			</div>
+			<div ng-show="event.itemChanged === 'posts'" style="overflow:auto;">
+				<img ng-src="{{getUser(event._creator)[0].profileImageURL}}" alt="{{getUser(event._creator)[0].displayName}}" class="img-responsive post-content-list-feed">
+				<h4 class="list-group-item-heading" ng-bind="getUser(event._creator)[0].displayName"></h4>
+				<h6 class="list-group-item-heading">{{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h6>
+				<p class="list-group-item-text">{{event.newValue}}</p>
+			</div>
 		</a>
 	</div>
 </section>

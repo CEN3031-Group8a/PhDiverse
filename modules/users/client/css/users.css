@@ -42,7 +42,7 @@
   padding-top: 100px;
   padding-left: 5%;
   clear: both;
-	max-width: 45%;
+	max-width: 20%;
   max-height: 45%;
 
 }
@@ -57,4 +57,28 @@
     margin-right: 20px;
     clear:both;
 	max-width: 80px;
+}
+
+.post-content-list-feed {
+	float: left;
+    margin-right: 20px;
+    clear:both;
+	width: 120px;
+}
+
+.list-group-item {
+	overflow:auto;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: none;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    text-transform: none;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    text-transform: none;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    text-transform: none;
 }
