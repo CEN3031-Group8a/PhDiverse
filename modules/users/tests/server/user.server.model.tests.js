@@ -596,6 +596,100 @@ describe('User Model Unit Tests:', function () {
         }
       });
     });
+  });
+
+  describe('User Connection Tests', function() {
+    it('should allow connection request from other users', function (done) {
+      var _user1 = new User(user1);
+      var _user3 = new User(user3);
+
+      _user1.request = ['user3'];
+      _user1.save(function (err) {
+        should.not.exist(err);
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          done();
+        }
+      });
+    });
+
+    it('should be able to accept a connection request from other users', function (done) {
+      var _user1 = new User(user1);
+      var _user3 = new User(user3);
+
+      _user1.connections = ['user3'];
+      _user3.connections = ['user1'];
+      _user1.save(function (err) {
+        should.not.exist(err);
+        if (!err) {
+          _user3.save(function (err) {
+            should.not.exist(err);
+            if (!err) {
+              _user1.remove(function (err_remove) {
+                should.not.exist(err_remove);
+                _user3.remove(function (err_remove) {
+                  should.not.exist(err_remove);
+                  done();
+                });
+              });
+            } else {
+              done();
+            }
+          });
+        } else {
+          done();
+        }
+      });
+    });
+
+    it('should be able to remove a connection with another user', function (done) {
+      var _user1 = new User(user1);
+      var _user3 = new User(user3);
+
+      _user1.connections = ['user3'];
+      _user3.connections = ['user1'];
+      _user1.save(function (err) {
+        should.not.exist(err);
+        if (!err) {
+          _user3.save(function (err) {
+            should.not.exist(err);
+            if (!err) {
+              _user1.connections = [];
+              _user3.connections = [];
+              _user1.save(function (err) {
+                should.not.exist(err);
+                if (!err) {
+                  _user3.save(function (err) {
+                    should.not.exist(err);
+                    if (!err) {
+                      _user1.remove(function (err_remove) {
+                        should.not.exist(err_remove);
+                        _user3.remove(function (err_remove) {
+                          should.not.exist(err_remove);
+                          done();
+                        });
+                      });
+                    } else {
+                      done();
+                    }
+                  });
+                } else {
+                  done();
+                }
+              });
+            } else {
+              done();
+            }
+          });
+        } else {
+          done();
+        }
+      });
+    });
 
   });
 
