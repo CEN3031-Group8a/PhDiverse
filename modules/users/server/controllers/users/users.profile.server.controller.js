@@ -20,7 +20,6 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  var oldID = user._id;
   var oldUser = new User();
   var updatedUser = new User();
   
@@ -28,7 +27,7 @@ exports.update = function (req, res) {
 	  // `delay` returns a promise
 	  return new Promise(function(resolve, reject) {
 		// Only `delay` is able to resolve or reject the promise
-		User.findById(oldID, function(err, user) {
+		User.findById(req.body._id, function(err, user) {
 		  if (err) throw err;
 		  oldUser = user;
 		  resolve(7);
@@ -47,55 +46,113 @@ exports.update = function (req, res) {
 			var tempItemChanged;
 			var tempNewValue;
 
-		    if(user !== oldUser){
+		    if((user !== oldUser) && (String(user._id) === String(oldUser._id))){
+				var tempEvent;
 				if(user.region !== oldUser.region){
 					tempItemChanged = 'region';
 			        tempNewValue = user.region;
-				}
-			    if(user.bio !== oldUser.bio){
-					tempItemChanged = 'biography';
-					tempNewValue = user.bio;
-				}
-				if(user.institution !== oldUser.institution){
-					tempItemChanged = 'institution';
-					tempNewValue = user.institution;
-				}
-				if(user.degree !== oldUser.degree){
-					tempItemChanged = 'degree';
-					tempNewValue = user.degree;
-				}
-				if(user.publications.length > oldUser.publications.length){
-					tempItemChanged = 'publications';
-					tempNewValue = user.publications[user.publications.length-1].link;
-				}
-				if(user.videos.length > oldUser.videos.length){
-					tempItemChanged = 'videos';
-					tempNewValue = user.videos[user.videos.length-1].link;
-				}
-				if(user.posts.length > oldUser.posts.length){
-					tempItemChanged = 'posts';
-					tempNewValue = user.posts[user.posts.length-1].thought;
-				}
-				//Create event for saving
-				var event1;
-				if(tempItemChanged === 'posts'){
-					event1 = new UserEvent({
-						_creator: user.posts[user.posts.length-1].authorID,
-						itemChanged: tempItemChanged,
-						newValue: tempNewValue,
-						dateCreated: Date.now()
-					});
-				}
-				else{
-					event1 = new UserEvent({
+					tempEvent = new UserEvent({
 						_creator: user._id,
 						itemChanged: tempItemChanged,
 						newValue: tempNewValue,
 						dateCreated: Date.now()
 					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
 				}
-				oldUser.events.push(event1);
-				user.events.push(event1);
+			    if(user.bio !== oldUser.bio){
+					tempItemChanged = 'biography';
+					tempNewValue = user.bio;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.institution !== oldUser.institution){
+					tempItemChanged = 'institution';
+					tempNewValue = user.institution;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.degree !== oldUser.degree){
+					tempItemChanged = 'degree';
+					tempNewValue = user.degree;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.publications.length > oldUser.publications.length){
+					tempItemChanged = 'publications';
+					tempNewValue = user.publications[user.publications.length-1].link;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.videos.length > oldUser.videos.length){
+					tempItemChanged = 'videos';
+					tempNewValue = user.videos[user.videos.length-1].link;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.posts.length > oldUser.posts.length){
+					tempItemChanged = 'posts';
+					tempNewValue = user.posts[user.posts.length-1].thought;
+					tempEvent = new UserEvent({
+						_creator: user.posts[user.posts.length-1].authorID,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				//Create event for saving
+				/*if(tempItemChanged === 'posts'){
+					var event1 = new UserEvent({
+						_creator: user.posts[user.posts.length-1].authorID,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(event1);
+					user.events.push(event1);
+				}
+				else{
+					var event2 = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(event2);
+					user.events.push(event2);
+				}*/
 			}
 			  
 			user.save(function (err) {

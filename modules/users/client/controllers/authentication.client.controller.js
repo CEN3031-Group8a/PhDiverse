@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint no-multi-spaces:0, indent:0 */
 angular.module('users').controller('AuthenticationController', ['$scope', '$state', '$http', '$location', '$window', 'Authentication', 'PasswordValidator',
   function ($scope, $state, $http, $location, $window, Authentication, PasswordValidator) {
     $scope.authentication = Authentication;
@@ -47,7 +48,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        $state.go('admin.userfeed');
       }).error(function (response) {
         $scope.error = response.message;
       });
@@ -64,3 +65,17 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     };
   }
 ]);
+
+angular.module('users').directive('focus', function($timeout) {
+	return {
+		scope : { trigger : '@focus' }, link : function(scope, element) {
+			scope.$watch('trigger', function(value) {
+				if (value === "true") {
+					$timeout(function() {
+						element[0].focus();
+					});
+				}
+			});
+		}
+	};
+});
