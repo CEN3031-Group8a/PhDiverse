@@ -4,20 +4,20 @@
 angular.module('users.admin.routes').config(['$stateProvider',
   function ($stateProvider) {
     $stateProvider
-	   .state('admin.search', {
+     .state('admin.search', {
         url: '/users-search',
         templateUrl: 'modules/users/client/views/admin/list-users-search.client.view.html',
         controller: 'UserListController',
         data: {
-          roles: ['admin']
+          roles: ['user', 'admin', 'recruiter']
         }
       })
-	  .state('admin.connections', {
+    .state('admin.connections', {
         url: '/connections',
         templateUrl: 'modules/users/client/views/admin/list-connections.client.view.html',
         controller: 'UserConnectionsController',
         data: {
-          roles: ['admin']
+          roles: ['user', 'admin', 'recruiter']
         }
       })
       .state('admin.users', {
@@ -25,7 +25,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListAdminController',
         data: {
-          roles: ['admin']
+          roles: ['user', 'admin', 'recruiter']
         }
       })
       .state('admin.user', {
@@ -40,7 +40,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
           }]
         },
         data: {
-          roles: ['admin']
+          roles: ['user', 'admin', 'recruiter']
         }
       })
       .state('admin.userfeed', {
@@ -61,9 +61,6 @@ angular.module('users.admin.routes').config(['$stateProvider',
               userId: $stateParams.userId
             });
           }]
-        },
-        data: {
-          roles: ['admin']
         }
       });
   }

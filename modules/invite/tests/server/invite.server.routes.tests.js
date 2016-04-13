@@ -68,6 +68,32 @@ describe('Send email invite test', function () {
       });
   });
 
+  it('should be able to retrieve email page if admin', function (done) {
+    user.roles = ['user', 'admin'];
+
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Request invite page
+        agent.get('/api/invite') //problem line because /api/invite does not exist....
+          .expect(200)
+          .end(function (usersGetErr, usersGetRes) {
+            if (usersGetErr) {
+              return done(usersGetErr);
+            }
+
+            return done();
+          });
+      });
+  });
+
+
   after(function (done) {
     user.remove();
     User.remove().exec(done);

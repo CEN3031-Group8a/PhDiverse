@@ -20,9 +20,6 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  if (user) {
-    var oldID = user._id;
-  }
   var oldUser = new User();
   var updatedUser = new User();
   

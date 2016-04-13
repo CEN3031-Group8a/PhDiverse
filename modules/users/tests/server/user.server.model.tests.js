@@ -691,6 +691,66 @@ describe('User Model Unit Tests:', function () {
       });
     });
 
+    it('should be able to add a post to own timeline', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.posts = [ ['Test post', _user1._id] ];
+      _user1.save(function (err) {
+        should.not.exist(err);
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          done();
+        }
+      });
+    });
+
+    it('should be able to add a post to another users timeline', function (done) {
+      var _user1 = new User(user1);
+      var _user3 = new User(user3);
+
+      _user1.posts = [ ['Test post', _user3._id] ];
+      _user1.save(function (err) {
+        should.not.exist(err);
+        if (!err) {
+          _user1.remove(function (err_remove) {
+            should.not.exist(err_remove);
+            done();
+          });
+        } else {
+          done();
+        }
+      });
+    });
+
+    it('should be able to remove a post from own timeline', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.posts = [ ['Test post', _user1._id] ];
+      _user1.save(function (err) {
+        should.not.exist(err);
+        if (!err) {
+          _user1.posts = [];
+          _user1.save(function (err) {
+            should.not.exist(err);
+            if (!err) {
+              _user1.remove(function (err_remove) {
+                should.not.exist(err_remove);
+                done();
+              });
+            } else {
+              done();
+            }
+          });
+        } else {
+          done();
+        }
+      });
+    });
+
   });
 
   after(function (done) {
