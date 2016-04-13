@@ -1,0 +1,11 @@
+'use strict';
+
+describe('Invite E2E Tests:', function () {
+  describe('Invite', function () {
+    it('Should send email', function () {
+      browser.get('modules/invite/client/views/invite.client.view.html');
+      //expect(element.all(by.repeater('article in articles')).count()).toEqual(0);
+      expect(!inviteEmail.equals(null));
+    });
+  });
+});
