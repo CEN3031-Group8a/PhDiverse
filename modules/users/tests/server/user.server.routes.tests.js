@@ -4,17 +4,18 @@ var should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User'),
+//User = mongoose.model('users'),
+  User = require('./../../../users/server/models/user.server.model.js').User,
   express = require(path.resolve('./config/lib/express'));
 
 /**
- * Globals
- */
+  * Globals
+  */
 var app, agent, credentials, user, _user, admin;
 
 /**
- * User routes tests
- */
+  * User routes tests
+  */
 describe('User CRUD tests', function () {
 
   before(function (done) {
@@ -99,7 +100,7 @@ describe('User CRUD tests', function () {
 
             // NodeJS v4 changed the status code representation so we must check
             // before asserting, to be comptabile with all node versions.
-            if (process.version.indexOf('v4') === 0) {
+            if (process.version.indexOf('v4') === 0 || process.version.indexOf('v5') === 0) {
               signoutRes.text.should.equal('Found. Redirecting to /');
             } else {
               signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
@@ -110,7 +111,9 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to retrieve a list of users if not admin', function (done) {
+  it('should be able to retrieve a list of users without the additional admin functionality if not admin', function (done) {
+    user.roles = ['user'];
+    
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -122,7 +125,7 @@ describe('User CRUD tests', function () {
 
         // Request list of users
         agent.get('/api/users')
-          .expect(403)
+          .expect(200)
           .end(function (usersGetErr, usersGetRes) {
             if (usersGetErr) {
               return done(usersGetErr);
@@ -553,7 +556,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to change user own password if no new password is at all given', function (done) {
+  it('should not be able to change user own password if not signed-in', function (done) {
 
     // Change password
     agent.post('/api/users/password')
@@ -673,7 +676,7 @@ describe('User CRUD tests', function () {
           var userUpdate = {
             firstName: 'user_update_first',
             lastName: 'user_update_last',
-            roles: ['user', 'admin']
+            roles: ['user']
           };
 
           agent.put('/api/users')
@@ -895,6 +898,73 @@ describe('User CRUD tests', function () {
           });
       });
   });
+
+  it('should not be able to update own user curriculum vitae without being logged-in', function (done) {
+
+    agent.post('/api/users/curriculumvitae')
+      .send({})
+      .expect(400)
+      .end(function (userInfoErr, userInfoRes) {
+        if (userInfoErr) {
+          return done(userInfoErr);
+        }
+
+        userInfoRes.body.message.should.equal('User is not signed in');
+
+        // Call the assertion callback
+        return done();
+      });
+  });
+
+  it('should be able to change curriculum vitae if signed in', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/curriculumvitae')
+          .attach('newCurriculumVitae', './modules/users/client/img/profile/default.pdf')
+          .send(credentials)
+          .expect(200)
+          .end(function (userInfoErr, userInfoRes) {
+            // Handle change profile picture error
+            if (userInfoErr) {
+              return done(userInfoErr);
+            }
+
+            userInfoRes.body.should.be.instanceof(Object);
+            userInfoRes.body.profileImageURL.should.be.a.String();
+            userInfoRes.body._id.should.be.equal(String(user._id));
+
+            return done();
+          });
+      });
+  });
+
+  it('should not be able to change curriculum vitae if attach a document with a different field name', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/curriculumvitae')
+          .attach('fieldThatDoesntWork', './modules/users/client/img/profile/default.pdf')
+          .send(credentials)
+          .expect(400)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
 
   afterEach(function (done) {
     User.remove().exec(done);
