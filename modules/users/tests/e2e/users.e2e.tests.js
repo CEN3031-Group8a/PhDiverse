@@ -6,7 +6,8 @@ describe('Users E2E Tests:', function () {
     lastName: 'user',
     email: 'test.user@meanjs.com',
     username: 'testUser',
-    password: 'P@$$w0rd!!'
+    password: 'P@$$w0rd!!',
+    roles: ['user']
   };
 
   var user2 = {
@@ -14,7 +15,8 @@ describe('Users E2E Tests:', function () {
     lastName: 'user2',
     email: 'test.user2@meanjs.com',
     username: 'testUser2',
-    password: 'P@$$w0rd!!'
+    password: 'P@$$w0rd!!',
+    roles: ['user']
   };
 
   var signout = function () {
@@ -35,6 +37,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // First Name Error
@@ -51,6 +55,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Last Name Error
@@ -67,6 +73,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -85,6 +93,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -107,6 +117,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Email address error
@@ -123,6 +135,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.email')).sendKeys(user1.email);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Username Error
@@ -141,6 +155,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys('P@$$w0rd!');
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -159,6 +175,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys(')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+');
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -177,6 +195,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys('P@$$w0rd!!!');
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -195,6 +215,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys('p@$$w0rd!!');
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -213,6 +235,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys('P@$$word!!');
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -231,6 +255,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys('Passw0rdss');
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -249,6 +275,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
       element(by.model('credentials.password')).sendKeys(user1.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user1.roles);
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
@@ -269,6 +297,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user2.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys(user2.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user2.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -288,6 +318,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
       element(by.model('credentials.password')).sendKeys(user2.password);
+      // Enter Role
+      element(by.model('credentials.roles')).sendKeys(user2.roles);
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
@@ -322,7 +354,7 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Click Submit button
       element(by.css('button[type="submit"]')).click();
-      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/admin/userfeed');
     });
 
   });

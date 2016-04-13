@@ -6,7 +6,7 @@
    * the chat controller tests.
    */
   window.io = function() {
-    this.cbs = {};
+  //  this.cbs = {};
     this.on = function(msg, cb) {
       this.cbs[msg] = cb;
     };

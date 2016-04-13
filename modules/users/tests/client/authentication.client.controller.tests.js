@@ -57,7 +57,7 @@
 
           // Test scope value
           expect(scope.authentication.user).toEqual('Fred');
-          expect($location.url()).toEqual('/');
+          expect($location.url()).toEqual('/authentication/signin');
         });
 
         it('should be redirected to previous state after successful login',
@@ -65,10 +65,10 @@
             $state = _$state_;
             $state.previous = {
               state: {
-                name: 'articles.create'
+                name: 'admin.userfeed'
               },
               params: {},
-              href: '/articles/create'
+              href: '/admin/userfeed'
             };
 
             spyOn($state, 'transitionTo');
@@ -82,7 +82,8 @@
 
             // Test scope value
             expect($state.go).toHaveBeenCalled();
-            expect($state.go).toHaveBeenCalledWith($state.previous.state.name, $state.previous.params);
+            expect($state.go).toHaveBeenCalledWith($state.previous.state.name);
+           // expect($state.go).toHaveBeenCalledWith($state.previous.state.name, $state.previous.params);
 
           }));
 
