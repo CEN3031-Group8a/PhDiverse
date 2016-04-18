@@ -50,7 +50,7 @@ module.exports = {
   linkedin: {
     clientID: getCred('mean-linkedin', 'id') || 'APP_ID',
     clientSecret: getCred('mean-linkedin', 'secret') || 'APP_SECRET',
-    callbackURL: '/api/auth/linkedin/callback'
+    callbackURL: 'http://phdiverse.herokuapp.com/api/auth/linkedin/callback'
   },
   github: {
     clientID: getCred('mean-github', 'id') || 'APP_ID',
