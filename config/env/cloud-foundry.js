@@ -50,7 +50,7 @@ module.exports = {
   linkedin: {
     clientID: getCred('mean-linkedin', 'id') || 'APP_ID',
     clientSecret: getCred('mean-linkedin', 'secret') || 'APP_SECRET',
-    callbackURL: 'https://oauth.io/auth/linkedin/callback'
+    callbackURL: 'https://oauth.io/auth'
   },
   github: {
     clientID: getCred('mean-github', 'id') || 'APP_ID',
