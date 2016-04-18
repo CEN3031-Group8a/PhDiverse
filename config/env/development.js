@@ -57,7 +57,7 @@ module.exports = {
   github: {
     clientID: process.env.GITHUB_ID || 'APP_ID',
     clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
-    callbackURL: '/api/auth/github/callback'
+    callbackURL: 'http://phdiverse.herokuapp.com/api/auth/github/callback'
   },
   paypal: {
     clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
