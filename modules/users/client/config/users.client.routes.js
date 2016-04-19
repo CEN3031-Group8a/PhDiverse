@@ -71,9 +71,9 @@ angular.module('users').config(['$stateProvider',
          * WARNING: SIGNUP PAGE ALLOWS FOR USERS TO SELECT THEIR ROLE, INCLUDING ADMIN!
          * DO NOT REENABLE IN DEPLOYMENT UNTIL THE ROLE SELECTION FIELD GETS REMOVED.
          * Enable signup page by removing these next 3 lines of code. */
-        // data: {
-        //   roles: ['admin']
-        // }
+        data: {
+          roles: ['admin']
+        }
       })
       .state('authentication.signin', {
         url: '/signin?err',
