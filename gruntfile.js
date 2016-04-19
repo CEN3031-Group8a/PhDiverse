@@ -307,6 +307,16 @@ module.exports = function (grunt) {
   grunt.registerTask('test:server', ['env:test', 'lint', 'server', 'mochaTest']);
   grunt.registerTask('test:client', ['env:test', 'lint', 'karma:unit']);
   grunt.registerTask('test:e2e', ['env:test', 'lint', 'dropdb', 'server', 'protractor']);
+
+  // Run mocha tests only
+  grunt.registerTask('mocha', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'mochaTest']);
+
+  // Run karma tests only
+  grunt.registerTask('karma', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'karma:unit']);
+
+  // Run e2e tests only
+  grunt.registerTask('e2e', ['env:test', 'lint', 'mkdir:upload', 'copy:localConfig', 'server', 'protractor']);
+
   // Run project coverage
   grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
 
