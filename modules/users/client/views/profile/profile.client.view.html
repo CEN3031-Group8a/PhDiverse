@@ -82,7 +82,7 @@
   
   <div class="list-group" ng-controller="UserFeedController">
     <div ng-hide="!user.events.length"><h1>Timeline</h1></div>
-    <a ng-show="event.itemChanged != null" class="list-group-item" ng-repeat="event in user.events.slice().reverse()" type="event.type" close="user.events.splice(index, 1)">
+    <a ng-show="event.itemChanged != null" ui-sref="admin.user({userId: event._creator})" class="list-group-item" ng-repeat="event in user.events.slice().reverse()" type="event.type" close="user.events.splice(index, 1)">
     	<div ng-show="event.itemChanged !== 'posts'">
 			<img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-responsive post-content-list-feed">
 			<h4 class="list-group-item-heading" ng-bind="user.displayName"></h4>

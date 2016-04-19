@@ -164,11 +164,11 @@ exports.update = function (req, res) {
 				res.json(user);
 			  }
 			});
-		  } else {
+		} else {
 			res.status(400).send({
 			  message: 'User is not signed in'
 			});
-		  }
+		}
 	});
 };
 

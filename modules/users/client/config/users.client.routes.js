@@ -10,7 +10,7 @@ angular.module('users').config(['$stateProvider',
         url: '/settings',
         templateUrl: 'modules/users/client/views/settings/settings.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin', 'recruiter']
         }
       })
       .state('profile', {
@@ -19,27 +19,45 @@ angular.module('users').config(['$stateProvider',
       })
       .state('settings.profile', {
         url: '/edit-profile',
-        templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
       })
       .state('settings.password', {
         url: '/password',
-        templateUrl: 'modules/users/client/views/settings/change-password.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/change-password.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
       })
       .state('settings.accounts', {
         url: '/accounts',
-        templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
       })
   	  .state('settings.picture', {
   		  url: '/picture',
-  		  templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
+  		  templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
   	  })
   	  .state('settings.currvit', {
         url: '/curriculumvitae',
-        templateUrl: 'modules/users/client/views/settings/change-curriculum-vitae.client.view.html'
+        templateUrl: 'modules/users/client/views/settings/change-curriculum-vitae.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
       })
-	  .state('settings.add-connections', {
+      .state('settings.add-connections', {
         url: '/add-connections',
-        templateUrl: 'modules/users/client/views/admin/add-connections.client.view.html'
+        templateUrl: 'modules/users/client/views/admin/add-connections.client.view.html',
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
       })
       .state('authentication', {
         abstract: true,
@@ -49,6 +67,10 @@ angular.module('users').config(['$stateProvider',
       .state('authentication.signup', {
         url: '/signup',
         templateUrl: 'modules/users/client/views/authentication/signup.client.view.html',
+        /* Signup page only allowed for logged-in admins - essentially it's disabled.
+         * WARNING: SIGNUP PAGE ALLOWS FOR USERS TO SELECT THEIR ROLE, INCLUDING ADMIN!
+         * DO NOT REENABLE IN DEPLOYMENT UNTIL THE ROLE SELECTION FIELD GETS REMOVED.
+         * Enable signup page by removing these next 3 lines of code. */
         data: {
           roles: ['admin']
         }

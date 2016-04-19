@@ -10,7 +10,8 @@
     </div>
   </div>
   <div class="list-group">
-    <a ng-repeat="user in pagedItems" class="list-group-item">
+    <a ng-repeat="user in pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
+	  <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-responsive post-content-list-feed">
       <h4>{{user.displayName}}</h4>
 	  <p>{{user.email}}</p>
 	  <p class="btn btn-primary" ng-click="add(user);">
@@ -21,6 +22,5 @@
       </p>
     </a>
   </div>
-
   <!--<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
 </section>

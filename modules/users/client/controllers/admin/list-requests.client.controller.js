@@ -14,19 +14,11 @@ angular.module('users.admin').controller('RequestListController', ['$scope', '$f
       $scope.currentPage = 1;
       $scope.figureOutItemsToDisplay();
     };
-
-    $scope.figureOutItemsToDisplay = function () {
-      if($scope.currUser.requests.length > 0){
-	      $scope.currUser.requests.forEach(function(entry) {
-			  $scope.filteredItems = $filter('filter')($scope.users, {
-				_id: entry
-			  });
-			}, this);
-		  $scope.filterLength = $scope.filteredItems.length;
-		  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-		  var end = begin + $scope.itemsPerPage;
-		  $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-	  }
+	
+	$scope.figureOutItemsToDisplay = function () {
+	  $scope.pagedItems = $scope.users.filter(function (user) {
+		  return Authentication.user.requests.indexOf(user._id) !== -1;
+	  });
     };
 
     $scope.pageChanged = function () {
