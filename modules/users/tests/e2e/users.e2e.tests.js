@@ -593,7 +593,7 @@ describe('Users E2E Tests:', function () {
       element(by.id('rejectConnectionButton')).click();
       browser.driver.sleep(3000);
 
-      expect(browser.getCurrentUrl()).toContain('http://localhost:3001/admin/users/');
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/settings/add-connections');
     });
 
     it('Should be able to accept a connection request', function() {
@@ -624,7 +624,7 @@ describe('Users E2E Tests:', function () {
       element(by.id('acceptConnectionButton')).click();
       browser.driver.sleep(5000);
 
-      expect(browser.getCurrentUrl()).toContain('http://localhost:3001/admin/users/');
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/settings/add-connections');
     });
   });
 
