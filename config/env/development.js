@@ -52,7 +52,7 @@ module.exports = {
   linkedin: {
     clientID: process.env.LINKEDIN_ID || 'APP_ID',
     clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
-    callbackURL: 'https://oauth.io/auth'
+    callbackURL: 'http://phdiverse.herokuapp.com/api/auth/linkedin/callback'
   },
   github: {
     clientID: process.env.GITHUB_ID || 'APP_ID',
