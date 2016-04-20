@@ -18,10 +18,12 @@ angular.module('users.admin').controller('UserFeedController', ['$scope', '$filt
     };
 	
     $scope.figureOutItemsToDisplay = function () {
-	  $scope.filteredConns = $scope.users.filter(function (user) {
-		  return Authentication.user.connections.indexOf(user._id) !== -1;
-	  });
-	  $scope.mergeArrays();
+		if($scope.users !== undefined){
+			$scope.filteredConns = $scope.users.filter(function (user) {
+				  return Authentication.user.connections.indexOf(user._id) !== -1;
+			});
+		    $scope.mergeArrays();
+		}
     };
 	
 	$scope.mergeArrays = function () {
@@ -40,7 +42,7 @@ angular.module('users.admin').controller('UserFeedController', ['$scope', '$filt
     };
 	
 	$scope.getUser = function(userID) {
-		if(userID !== undefined){
+		if(userID !== undefined && $scope.users !== undefined){
 			var res = $scope.users.filter(function(obj) {
 			  return obj._id === userID;
 			});
