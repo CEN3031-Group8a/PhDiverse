@@ -30,6 +30,8 @@ describe('Users E2E Tests:', function () {
   describe('Signup Validation', function () {
     it('Should report missing first name', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter Last Name
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
@@ -40,6 +42,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
@@ -49,6 +53,8 @@ describe('Users E2E Tests:', function () {
 
     it('Should report missing last name', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter First Name
       element(by.model('credentials.firstName')).sendKeys(user1.firstName);
       // Enter Email
@@ -59,6 +65,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
@@ -68,6 +76,8 @@ describe('Users E2E Tests:', function () {
 
     it('Should report missing email address', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter First Name
       element(by.model('credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -78,6 +88,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
@@ -87,6 +99,8 @@ describe('Users E2E Tests:', function () {
 
     it('Should report invalid email address - "123"', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter First Name
       element(by.model('credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -99,6 +113,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
@@ -112,6 +128,8 @@ describe('Users E2E Tests:', function () {
      */
     it('Should report invalid email address - "123@123@123"', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter First Name
       element(by.model('credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -124,6 +142,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
@@ -133,6 +153,8 @@ describe('Users E2E Tests:', function () {
 
     it('Should report missing username', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter First Name
       element(by.model('credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -143,6 +165,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys(user1.password);
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
@@ -152,6 +176,8 @@ describe('Users E2E Tests:', function () {
 
     it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function () {
       browser.get('http://localhost:3001/authentication/signup');
+      browser.driver.sleep(3000);
+
       // Enter First Name
       element(by.model('credentials.firstName')).sendKeys(user1.firstName);
       // Enter Last Name
@@ -164,6 +190,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.password')).sendKeys('P@$$w0rd!');
       // Enter Role
       element(by.model('credentials.roles')).sendKeys(user1.roles);
+      browser.driver.sleep(3000);
+
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       browser.driver.sleep(3000);
