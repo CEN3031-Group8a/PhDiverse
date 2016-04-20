@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div class="list-group" ng-controller="UserFeedController">
-		<a class="list-group-item" ng-repeat="event in userFeed | orderBy:'-dateCreated' track by $index" ui-sref="admin.user({userId: event._creator})" style="overflow:auto;">
+		<a id="userfeed-list-item" class="list-group-item" ng-repeat="event in userFeed | orderBy:'-dateCreated' track by $index" ui-sref="admin.user({userId: event._creator})" style="overflow:auto;">
 			<img ng-src="{{getUser(event._creator)[0].profileImageURL}}" alt="{{getUser(event._creator)[0].displayName}}" class="img-responsive post-content-list-feed">
 			<div ng-show="event.itemChanged !== 'posts'">
 				<h4 class="list-group-item-heading" ng-bind="getUser(event._creator)[0].displayName"></h4>

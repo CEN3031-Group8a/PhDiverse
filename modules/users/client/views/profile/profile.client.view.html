@@ -68,7 +68,7 @@
 		<div class="form-group">
 			<br>
 			<input name="newPostSub" ng-model="newPost.thought" type="text" class="form-control" placeholder="Share your thoughts" style="width:800px;max-width: 85%;" required></input>
-			<button class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToPosts(newPost, userForm)">Post</button>
+			<button id="postPostButton" class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToPosts(newPost, userForm)">Post</button>
 		</div>
 		<br><br>
 		<div ng-show="success" class="text-center text-success">
