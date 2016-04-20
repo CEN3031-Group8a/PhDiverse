@@ -15,6 +15,7 @@ https://phdiverse.herokuapp.com/
 
 ## Project Features
 * Landing Page:
+![alt tag](https://github.com/CEN3031-Group8a/PhDiverse/blob/Development/final%20screenshots/SplashPage.JPG)
 
 * Login Page:
 
