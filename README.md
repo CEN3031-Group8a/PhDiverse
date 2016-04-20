@@ -1,12 +1,69 @@
-[![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
+PhDiverse is a professional community built for PhD's of diverse backgrounds.
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/meanjs/mean?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=master)](https://travis-ci.org/meanjs/mean)
-[![Dependencies Status](https://david-dm.org/meanjs/mean.svg)](https://david-dm.org/meanjs/mean)
-[![Coverage Status](https://coveralls.io/repos/meanjs/mean/badge.svg?branch=master&service=github)](https://coveralls.io/github/meanjs/mean?branch=master)
+## Link to Deployed Page
+https://phdiverse.herokuapp.com/
 
-MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components.
+## Borrowed Code and APIs 
+* Bootstrap
+* LinkedIn
+* Nodemailer
+* Mailgun
+* mLab
+* Express
+* Angular.js
+* Node.js
 
+## Project Features
+* Landing Page:
+
+* Login Page:
+
+* User Feed:
+
+* Profile Page:
+
+* User Posts:
+
+* Curriculum Vitae Upload:
+
+* Edit Profile:
+
+* Publication and Video Links:
+
+* Invite New Members:
+
+* Administrator Edits:
+
+* User Search:
+
+* Connection Requests:
+
+## Running the Project Locally
+* 
+
+## Updating Database Connection
+* When running the website locally, one should modify the file called "mean/config/env/local.js" and enter the database's URI in this entry:
+** db: {
+    uri: <your URI goes here>,
+    options: {
+      user: '',
+      pass: ''
+    }
+  }
+* When running the website on Heroku, one should ensure the file called "mean/config/env/production.js" looks as it does below:
+** db: {
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
+    options: {
+      user: '',
+      pass: ''
+    },
+    // Enable mongoose debug mode
+    debug: process.env.MONGODB_DEBUG || false
+  }
+** Next, one should navigate to the app's Settings page on Heroku.com and change the Config Variable called "MONGOLAB_URI" to the desired database's URI.
+
+
+  
 ## Before You Begin
 Before you begin we recommend you read about the basic building blocks that assemble a MEAN.JS application:
 * MongoDB - Go through [MongoDB Official Website](http://mongodb.org/) and proceed to their [Official Manual](http://docs.mongodb.org/manual/), which should help you understand NoSQL and MongoDB better.

@@ -9,13 +9,13 @@
 	<div class="list-group" ng-controller="UserFeedController">
 		<a class="list-group-item" ng-repeat="event in userFeed | orderBy:'-dateCreated' track by $index" ui-sref="admin.user({userId: event._creator})" style="overflow:auto;">
 			<img ng-src="{{getUser(event._creator)[0].profileImageURL}}" alt="{{getUser(event._creator)[0].displayName}}" class="img-responsive post-content-list-feed">
-			<div ng-show="event.itemChanged !== 'posts'">
+			<div ng-if="event.itemChanged !== 'posts'">
 				<h4 class="list-group-item-heading" ng-bind="getUser(event._creator)[0].displayName"></h4>
 				<h6 class="list-group-item-heading">{{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h6>
 				<p>{{event.itemChanged  | capitalize}} updated to:</p>
 				<p class="list-group-item" style="overflow:auto;margin-left=30px;">{{event.newValue}}</p>
 			</div>
-			<div ng-show="event.itemChanged === 'posts'" style="overflow:auto;">
+			<div ng-if="event.itemChanged === 'posts'" style="overflow:auto;">
 				<h4 class="list-group-item-heading" ng-bind="getUser(event._creator)[0].displayName"></h4>
 				<h6 class="list-group-item-heading">{{event.dateCreated | date:'MM/dd/yyyy @ h:mma'}}</h6>
 				<p class="list-group-item-text">{{event.newValue}}</p>
