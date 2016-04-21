@@ -1,3 +1,5 @@
+# PhDiverse
+
 PhDiverse is a professional community built for PhD's of diverse backgrounds.
 
 ## Link to Deployed Page
