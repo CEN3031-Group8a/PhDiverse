@@ -32,19 +32,19 @@
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
       <li class="dropdown" dropdown>
-        <a id="userOptionsDropdown" class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+        <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
           <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
           <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
           <li ui-sref-active="active">
-            <a id='myProfileButton' ui-sref="profile({ profileId: authentication.user._id })">My Profile</a>
+            <a ui-sref="profile({ profileId: authentication.user._id })">My Profile</a>
           </li>
-					<li ui-sref-active="active">
+		  <li ui-sref-active="active">
             <a ui-sref="admin.connections">Connections</a>
           </li>
-				  <li class="divider"></li>
-				  <li ui-sref-active="active">
+		  <li class="divider"></li>
+		  <li ui-sref-active="active">
             <a ui-sref="settings.add-connections">Connection Requests</a>
           </li>
           <li ui-sref-active="active">
@@ -53,7 +53,7 @@
           <li ui-sref-active="active">
             <a ui-sref="settings.picture">Change Profile Picture</a>
           </li>
-				  <li ui-sref-active="active">
+		  <li ui-sref-active="active">
             <a ui-sref="settings.currvit">Change Curriculum Vitae</a>
           </li>
           <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
