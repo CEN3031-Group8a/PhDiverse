@@ -20,7 +20,6 @@ coverage/
 # ======================
 public/dist/
 config/env/local.js
-config/env/test.js
 *.pem
 
 # Ignoring MEAN.JS's gh-pages branch for documenation
