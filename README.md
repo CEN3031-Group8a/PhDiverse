@@ -65,8 +65,9 @@ https://phdiverse.herokuapp.com/
 ![alt tag](https://github.com/CEN3031-Group8a/PhDiverse/blob/Development/final%20screenshots/ConnectionRequests.JPG)
 
 ## Running the Project Locally
-* In order to run the project locally, the user should clone this repository to a local folder. After opening a command shell, the user should run npm install to make sure all of the modules are updated.
-* Next, the user should type grunt into the command shell. When the user navigates to http://localhost:3000/ in a browser, the website should appear and be running.
+* In order to run the project locally, the user should clone this repository to a local folder. After opening a command shell, the user should run npm install to make sure all of the modules for MEAN.JS are updated.
+* Next, the user should type "npm install nodemailer" into the command shell to install the necessary module for sending administrative email invitations.
+* Finally, the user should type "grunt" into the command shell. When the user navigates to http://localhost:3000/ in a browser, the website should appear and be running.
 
 ## Updating the Database Connection
 * When running the website locally, one should modify the file called "mean/config/env/local.js" and enter the database's URI in this entry:
