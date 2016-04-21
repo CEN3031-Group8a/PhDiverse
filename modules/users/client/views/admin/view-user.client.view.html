@@ -15,7 +15,7 @@
 									<a class="btn btn-primary" ng-click="remove();" ng-if="user._id !== authentication.user._id" ng-hide="authentication.user.roles[0] !== 'admin'">
 										<i class="glyphicon glyphicon-trash"></i>
 									</a>
-									<a class="btn btn-primary" ng-click="add();" ng-show="user._id !== authentication.user._id && !(authentication.user.requests.indexOf(user._id) > -1) && !(user.connections.indexOf(authentication.user._id) > -1)">
+									<a id="addColleagueButton" class="btn btn-primary" ng-click="add();" ng-show="user._id !== authentication.user._id && !(authentication.user.requests.indexOf(user._id) > -1) && !(user.connections.indexOf(authentication.user._id) > -1)">
 										<i class="glyphicon glyphicon-plus"></i> Add Colleague
 									</a>
 								</div>
@@ -82,7 +82,7 @@
 			<div class="form-group">
 				<br>
 				<input name="newPostSub" ng-model="newPost.thought" type="text" class="form-control" placeholder="Share your thoughts" style="width:800px;max-width: 85%;" required></input>
-				<button class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToOtherPosts(newPost, userForm)">Post</button>
+				<button id="postPostButton" class="btn btn-default" ng-disabled="userForm.newPostSub.$error.required" ng-click="addToOtherPosts(newPost, userForm)">Post</button>
 			</div>
 			<br><br>
 			<div ng-show="success" class="text-center text-success">
