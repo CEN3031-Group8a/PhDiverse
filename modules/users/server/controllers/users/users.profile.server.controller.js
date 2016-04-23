@@ -11,9 +11,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
-  UserEvent = mongoose.model('UserEvent'),
-  deep = require('deep-diff'),
-  diff = require('deep-diff').diff;
+  UserEvent = mongoose.model('UserEvent');
 
 
 /**
@@ -22,7 +20,6 @@ var _ = require('lodash'),
 exports.update = function (req, res) {
   // Init Variables
   var user = req.user;
-  var oldID = user._id;
   var oldUser = new User();
   var updatedUser = new User();
   
@@ -30,68 +27,13 @@ exports.update = function (req, res) {
 	  // `delay` returns a promise
 	  return new Promise(function(resolve, reject) {
 		// Only `delay` is able to resolve or reject the promise
-		User.findById(oldID, function(err, user) {
+		User.findById(req.body._id, function(err, user) {
 		  if (err) throw err;
 		  oldUser = user;
 		  resolve(7);
 		});	
 	  });
 	}
-	
-	function findChanges(prevUser, nextUser) {
-	  var tempItemChanged;
-    var tempNewValue;
-
-	  if(nextUser !== prevUser){
-		  if(nextUser.region !== prevUser.region){
-			  tempItemChanged = 'region';
-        tempNewValue = nextUser.region;
-      }
-      if(nextUser.bio !== prevUser.bio){
-        tempItemChanged = 'biography';
-        tempNewValue = nextUser.bio;
-      }
-      if(nextUser.institution !== prevUser.institution){
-        tempItemChanged = 'institution';
-        tempNewValue = nextUser.institution;
-      }
-      if(nextUser.degree !== prevUser.degree){
-        tempItemChanged = 'degree';
-        tempNewValue = nextUser.degree;
-      }
-      /*
-      if(nextUser.publications !== prevUser.publications){
-        tempItemChanged = 'publications';
-        tempNewValue = nextUser.publications;
-      }
-      if(nextUser.videos !== prevUser.videos){
-        tempItemChanged = 'videos';
-        tempNewValue = nextUser.videos;
-      }
-      */
-
-      //Create event for saving
-      var event1 = new UserEvent({
-        _creator: nextUser._id,
-        itemChanged: tempItemChanged,
-        newValue: tempNewValue,
-        dateCreated: Date.now()
-      });
-
-      //Save event
-      event1.save(function (err) {
-        console.log('*Save function did something!*');
-        //Save event to user's event array
-        nextUser.events.push(event1);
-        nextUser.save(function (err){
-          if(err) console.log(err);
-        });
-        if (err) console.log(err);
-      });
-    }
-    return;
-  }
-	  
 
 	asyncCheck().then(function(v) { //asyncCheck() returns a promise
 		if (user) {
@@ -99,29 +41,134 @@ exports.update = function (req, res) {
 			user = _.extend(user, req.body);
 			user.updated = Date.now();
 			user.displayName = user.firstName + ' ' + user.lastName;
+			
+			//Finding differences
+			var tempItemChanged;
+			var tempNewValue;
 
+		    if((user !== oldUser) && (String(user._id) === String(oldUser._id))){
+				var tempEvent;
+				if(user.region !== oldUser.region){
+					tempItemChanged = 'region';
+			        tempNewValue = user.region;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+			    if(user.bio !== oldUser.bio){
+					tempItemChanged = 'biography';
+					tempNewValue = user.bio;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.institution !== oldUser.institution){
+					tempItemChanged = 'institution';
+					tempNewValue = user.institution;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.degree !== oldUser.degree){
+					tempItemChanged = 'degree';
+					tempNewValue = user.degree;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.publications.length > oldUser.publications.length){
+					tempItemChanged = 'publications';
+					tempNewValue = user.publications[user.publications.length-1].link;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.videos.length > oldUser.videos.length){
+					tempItemChanged = 'videos';
+					tempNewValue = user.videos[user.videos.length-1].link;
+					tempEvent = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				if(user.posts.length > oldUser.posts.length){
+					tempItemChanged = 'posts';
+					tempNewValue = user.posts[user.posts.length-1].thought;
+					tempEvent = new UserEvent({
+						_creator: user.posts[user.posts.length-1].authorID,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(tempEvent);
+					user.events.push(tempEvent);
+				}
+				//Create event for saving
+				/*if(tempItemChanged === 'posts'){
+					var event1 = new UserEvent({
+						_creator: user.posts[user.posts.length-1].authorID,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(event1);
+					user.events.push(event1);
+				}
+				else{
+					var event2 = new UserEvent({
+						_creator: user._id,
+						itemChanged: tempItemChanged,
+						newValue: tempNewValue,
+						dateCreated: Date.now()
+					});
+					oldUser.events.push(event2);
+					user.events.push(event2);
+				}*/
+			}
+			  
 			user.save(function (err) {
 			  if (err) {
 				return res.status(400).send({
 				  message: errorHandler.getErrorMessage(err)
 				});
 			  } else {
-				req.login(user, function (err) {
-				  if (err) {
-					res.status(400).send(err);
-				  } else {
-					res.json(user);
-					updatedUser = user;
-					findChanges(oldUser, updatedUser);
-				  }
-				});
+				res.json(user);
 			  }
 			});
-		  } else {
+		} else {
 			res.status(400).send({
 			  message: 'User is not signed in'
 			});
-		  }
+		}
 	});
 };
 
@@ -170,7 +217,6 @@ exports.changeProfilePicture = function (req, res) {
 
                 //Save profile pic event
                 event1.save(function (err) {
-                  console.log('*Save function did something!*');
                   //Save event to user's event array
                   user.events.push(event1._id);
                   user.save(function (err){
@@ -233,7 +279,6 @@ exports.changeCurriculumVitae = function (req, res) {
 
                 //Save CV event
                 event1.save(function (err) {
-                  console.log('*Save function did something!*');
                   //Save event to user's event array
                   user.events.push(event1._id);
                   user.save(function (err){

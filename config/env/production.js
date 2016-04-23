@@ -50,6 +50,10 @@ module.exports = {
     clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/google/callback'
   },
+  favicon: 'modules/core/client/img/brand/favicon.ico',
+  app: {
+    title: 'PhDiverse'
+  },
   linkedin: {
     clientID: process.env.LINKEDIN_ID || 'APP_ID',
     clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',

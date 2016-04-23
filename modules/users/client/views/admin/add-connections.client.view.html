@@ -11,16 +11,16 @@
   </div>
   <div class="list-group">
     <a ng-repeat="user in pagedItems" class="list-group-item">
+	  <img ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}" class="img-responsive post-content-list-feed">
       <h4>{{user.displayName}}</h4>
 	  <p>{{user.email}}</p>
 	  <p class="btn btn-primary" ng-click="add(user);">
-        <i class="glyphicon glyphicon-ok"></i>
+        <i id='acceptConnectionButton' class="glyphicon glyphicon-ok"></i>
       </p>
 	  <p class="btn btn-primary" ng-click="remove(user);">
-        <i class="glyphicon glyphicon-remove"></i>
+        <i id='rejectConnectionButton' class="glyphicon glyphicon-remove"></i>
       </p>
     </a>
   </div>
-
   <!--<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
 </section>

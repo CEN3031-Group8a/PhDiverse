@@ -1,8 +1,8 @@
 'use strict';
 
 /* eslint no-multi-spaces:0, indent:0 */
-angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-  function ($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication', '$window',
+  function ($scope, $http, $location, Users, Authentication, $window) {
     $scope.init = function(user) {
 		//private constructor for controller
 		if(user){
@@ -37,6 +37,31 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 		$scope.user.videos.splice(index, 1);
 	};
 	
+	$scope.addToPosts = function (newPost, newForm) {
+		if(newPost !== '' && typeof newPost !== 'undefined'){
+			newPost.authorID = Authentication.user._id;
+			$scope.user.posts.push(newPost);
+			$scope.newPost = {};
+			$scope.updateUserProfile(newForm);
+		}
+	};
+	
+	$scope.addToOtherPosts = function (newPost, newForm) {
+		if(newPost !== '' && typeof newPost !== 'undefined'){
+			newPost.authorID = Authentication.user._id;
+			$scope.user.posts.push(newPost);
+			$scope.newPost = {};
+			var user = new Users($scope.user);
+			user.$update(function (response) {
+				$scope.$broadcast('show-errors-reset', 'userForm');
+				$scope.success = true;
+				$window.location.reload(true);
+			}, function (response) {
+				$scope.error = response.data.message;
+			});
+		}
+	};
+	
     // Update a user profile
     $scope.updateUserProfile = function (isValid) {
       $scope.success = $scope.error = null;
@@ -51,12 +76,18 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
       user.$update(function (response) {
         $scope.$broadcast('show-errors-reset', 'userForm');
-
         $scope.success = true;
         Authentication.user = response;
+		$window.location.reload(true);
       }, function (response) {
         $scope.error = response.data.message;
       });
     };
   }
 ]);
+
+angular.module('users').filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    };
+});

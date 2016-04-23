@@ -4,7 +4,7 @@
 angular.module('users.admin.routes').config(['$stateProvider',
   function ($stateProvider) {
     $stateProvider
-	   .state('admin.search', {
+     .state('admin.search', {
         url: '/users-search',
         templateUrl: 'modules/users/client/views/admin/list-users-search.client.view.html',
         controller: 'UserListController',
@@ -12,7 +12,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
           roles: ['user', 'admin', 'recruiter']
         }
       })
-	  .state('admin.connections', {
+    .state('admin.connections', {
         url: '/connections',
         templateUrl: 'modules/users/client/views/admin/list-connections.client.view.html',
         controller: 'UserConnectionsController',
@@ -39,6 +39,14 @@ angular.module('users.admin.routes').config(['$stateProvider',
             });
           }]
         },
+        data: {
+          roles: ['user', 'admin', 'recruiter']
+        }
+      })
+      .state('admin.userfeed', {
+        url: '/userfeed',
+        templateUrl: 'modules/users/client/views/admin/view-userfeed.client.view.html',
+        controller: 'UserFeedController',
         data: {
           roles: ['user', 'admin', 'recruiter']
         }
